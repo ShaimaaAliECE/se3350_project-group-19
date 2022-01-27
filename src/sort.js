@@ -1,3 +1,10 @@
+/**
+ * Merge sorts an array of numbers and adds the steps taken to an array.
+ * @param {number[]} arr The array of numbers to sort
+ * @param {number} num 0 if this is the left array, 1 if this is the right array
+ * @param {Array} steps The array into which the sorting steps will be added
+ * @returns 
+ */
 function mergeSort(arr, num, steps)
 {
     if (arr.length == 1)
@@ -20,6 +27,13 @@ function mergeSort(arr, num, steps)
     return merge(leftHalf, arr, steps);
 }
 
+/**
+ * Merges two sorted arrays of numbers and adds the steps taken to an array.
+ * @param {number[]} left The left array to merge
+ * @param {number[]} right The right array to merge
+ * @param {Array} steps The array into which the sorting steps will be added
+ * @returns An array containing the sorted contents of the left and right arrays
+ */
 function merge(left, right, steps)
 {
     let arr = [];
@@ -79,6 +93,16 @@ function merge(left, right, steps)
     return arr;
 }
 
+/**
+ * Generates the steps to merge sort a given array of numbers.
+ * Each step is of the form {stepType, array, index} where:
+ * - stepType: the type of operation for this step, either merge or split.
+ * - array: The array to perform the operation on, 0 for left or 1 for right.
+ * - index: The array index of the element to operate on. For splitting, the split is before the element with this index.
+ * Example: {split, 1, 2} means split the right array before the element with index 2 (or after the second element).
+ * @param {number[]} arr The array of numbers to be sorted.
+ * @returns An array containing the sorting steps, as described in the function description.
+ */
 function generateMergeSteps(arr)
 {
     let steps = [];
