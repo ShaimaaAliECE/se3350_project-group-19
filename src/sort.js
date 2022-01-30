@@ -18,7 +18,8 @@ function mergeSort(arr, num, steps)
     steps.push({
         stepType: 'split',
         array: num,
-        index: middle
+        index: middle,
+        instruction: `Split the ${num == 0 ? 'left' : 'right'} array before the ${getOrdinal(index)} element.`
     });
 
     leftHalf = mergeSort(leftHalf, 0, steps);
@@ -49,7 +50,8 @@ function merge(left, right, steps)
             steps.push({
                 stepType: 'merge',
                 array: 0,
-                index: leftIndex++
+                index: leftIndex++,
+                instruction: `Out of the first elements of both arrays, choose the smaller one and move it to the new array.`
             });
         }
         else
@@ -58,7 +60,8 @@ function merge(left, right, steps)
             steps.push({
                 stepType: 'merge',
                 array: 1,
-                index: rightIndex++
+                index: rightIndex++,
+                instruction: `Out of the first elements of both arrays, choose the smaller one and move it to the new array.`
             });
         }
     }
@@ -72,7 +75,8 @@ function merge(left, right, steps)
             steps.push({
                 stepType: 'merge',
                 array: 0,
-                index: leftIndex++
+                index: leftIndex++,
+                instruction: `The right array is empty, so move the remaining elements of the left array into the new array starting with the first one.`
             });
         }
     }
@@ -85,7 +89,8 @@ function merge(left, right, steps)
             steps.push({
                 stepType: 'merge',
                 array: 1,
-                index: rightIndex++
+                index: rightIndex++,
+                instruction: `The left array is empty, so move the remaining elements of the right array into the new array starting with the first one.`
             });
         }
     }
@@ -108,6 +113,31 @@ function generateMergeSteps(arr)
     let steps = [];
     arr = mergeSort(arr, 0, steps);
     return steps;
+}
+
+/**
+ * Gets the ordinal form (1st, 2nd, 11th, etc) of a given number.
+ * @param {number} n The number whose ordinal form to get
+ * @returns The ordinal form of n as a string.
+ */
+function getOrdinal(n)
+{
+    let lastDigit = String(n)[String(n).length - 1];
+    switch (lastDigit)
+    {
+        case 1:
+            if (n == 11){
+                return n + 'th';
+            }
+            return n + 'st';
+        case 2:
+            return n + 'nd';
+        case 3:
+            return n + 'rd';
+        default:
+            return n + 'th';
+    }
+    
 }
 
 //console.log(generateMergeSteps([12, 8, 31, 42, 4, 5, 15, 32, 5, 28]));
