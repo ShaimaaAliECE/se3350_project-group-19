@@ -100,11 +100,12 @@ function merge(left, right, steps)
 
 /**
  * Generates the steps to merge sort a given array of numbers.
- * Each step is of the form {stepType, array, index} where:
- * - stepType: the type of operation for this step, either merge or split.
- * - array: The array to perform the operation on, 0 for left or 1 for right.
- * - index: The array index of the element to operate on. For splitting, the split is before the element with this index.
- * Example: {split, 1, 2} means split the right array before the element with index 2 (or after the second element).
+ * Each step is of the form {stepType, array, index, instruction} where:
+ * - stepType (string): the type of operation for this step, either merge or split.
+ * - array (number): The array to perform the operation on, 0 for left or 1 for right.
+ * - index (number): The array index of the element to operate on. For splitting, the split is before the element with this index.
+ * - instruction (string): Text instructions for use in levels 1 and 2
+ * Example: {"split", 1, 2, ""} means split the right array before the element with index 2 (or after the second element).
  * @param {number[]} arr The array of numbers to be sorted.
  * @returns An array containing the sorting steps, as described in the function description.
  */
