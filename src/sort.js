@@ -19,7 +19,7 @@ function mergeSort(arr, num, steps)
         stepType: 'split',
         array: num,
         index: middle,
-        instruction: `Split the ${num == 0 ? 'left' : 'right'} array before the ${getOrdinal(index)} element.`
+        instruction: `Split the ${num == 0 ? 'left' : 'right'} array before the ${getOrdinal(middle)} element.`
     });
 
     leftHalf = mergeSort(leftHalf, 0, steps);
@@ -122,7 +122,7 @@ function generateMergeSteps(arr)
  */
 function getOrdinal(n)
 {
-    let lastDigit = String(n)[String(n).length - 1];
+    let lastDigit = Number(String(n)[String(n).length - 1]);
     switch (lastDigit)
     {
         case 1:
@@ -140,6 +140,6 @@ function getOrdinal(n)
     
 }
 
-//console.log(generateMergeSteps([12, 8, 31, 42, 4, 5, 15, 32, 5, 28]));
+console.log(generateMergeSteps([12, 8, 31, 42, 4, 5, 15, 32, 5, 28]));
 
 export default generateMergeSteps;
