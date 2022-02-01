@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 
 function App(){
   return (
-    <div></div>
+    <div>App</div>
   )
 }
 
