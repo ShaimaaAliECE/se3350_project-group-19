@@ -1,7 +1,7 @@
 
 import React from 'react'
 
-class LevelOne extends React.Component {
+class RandomNum extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -39,4 +39,4 @@ class LevelOne extends React.Component {
     }
   }
 
-  export default LevelOne
+  export default RandomNum

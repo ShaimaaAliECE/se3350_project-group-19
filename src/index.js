@@ -3,12 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import LevelOne from './LevelOne'
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
-    <LevelOne/>
   </React.StrictMode>,
   document.getElementById('root')
 );
