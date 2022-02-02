@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import generateRandomArray from "./rand_array";
 //Global variable to control flow
 var i =0;
+var arr = generateRandomArray(10, 20);
 
 class List extends Component {
   static propTypes = {
@@ -144,7 +146,7 @@ class App extends Component {
     });
   }
   render() {
-    const array = [8, 5, 4, 6, 7, 1, 3, 2,9];
+    const array = [...arr];
 
     return (
       <>
