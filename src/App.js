@@ -69,7 +69,7 @@ class SplitInstruction extends Component {
   render(){
   return (
     <div>
-      {(<h2>Split the above array</h2>)}
+      {(<h2>Take the half of the above array and split</h2>)}
       </div>
   )
   }
@@ -79,7 +79,7 @@ class MergeInstruction extends Component {
   render(){
   return (
     <div>
-      {(<h2>Choose smaller one and merge into new array</h2>)}
+      {(<h2>Choose smaller one at the top and merge into new array</h2>)}
       </div>
   )
   }
