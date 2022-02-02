@@ -67,7 +67,6 @@ class Join extends Component {
 
 class MergeSort extends Component {
 
-
   static propTypes = {
     array: PropTypes.array.isRequired,
     left: PropTypes.number.isRequired,
@@ -80,19 +79,16 @@ class MergeSort extends Component {
     let { array, left, right, maxCount} = this.props;
     const chunk = array.slice(left, right);
     const mid = left + Math.floor(chunk.length / 2);
-
-    
-
- 
     return(
       <div>
-         
         {chunk.length !=1 && (
          
           <>
+            <h2>Split this array</h2>
             <MergeSort {...this.props} right={mid} currCount = {0} />
             <MergeSort {...this.props} left={mid} currCount = {0}   />
             <div className="join">
+            <h2>Choose smaller one and merge into new array</h2>
               <Join {...this.props} mid={mid} currCount = {0} />
             </div>
            
@@ -157,8 +153,6 @@ class App extends Component {
           </button>
         </header>
         <section>
-
-
           <MergeSort array={array} left={0} right={array.length} maxCount = {this.state.maxCount} />
         </section>
       </>
