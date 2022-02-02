@@ -4,7 +4,6 @@ import generateRandomArray from "./rand_array";
 //Global variable to control flow
 var i =0;
 var arr = generateRandomArray(10, 20);
-
 class List extends Component {
   static propTypes = {
     values: PropTypes.array.isRequired
@@ -59,13 +58,37 @@ class Join extends Component {
     sorted.forEach((x, i) => (array[left + i] = x));
     return (
       <div>
-      {i<maxCount && (<List values={sorted} />)}
+      {i<maxCount && (<MergeInstruction/>)}
+      {i<maxCount && (<List values={sorted} /> )}
       </div>
     );
   }
 }
 
+class SplitInstruction extends Component {
+  render(){
+  return (
+    <div>
+      {(<h2>Split the above array</h2>)}
+      </div>
+  )
+  }
+}
+
+class MergeInstruction extends Component {
+  render(){
+  return (
+    <div>
+      {(<h2>Choose smaller one and merge into new array</h2>)}
+      </div>
+  )
+  }
+}
 class MergeSort extends Component {
+
+  constructor(props){
+    super(props)
+  }
 
   static propTypes = {
     array: PropTypes.array.isRequired,
@@ -84,11 +107,9 @@ class MergeSort extends Component {
         {chunk.length !=1 && (
          
           <>
-            <h2>Split this array</h2>
             <MergeSort {...this.props} right={mid} currCount = {0} />
             <MergeSort {...this.props} left={mid} currCount = {0}   />
             <div className="join">
-            <h2>Choose smaller one and merge into new array</h2>
               <Join {...this.props} mid={mid} currCount = {0} />
             </div>
            
@@ -107,8 +128,9 @@ class MergeSort extends Component {
     ++i;
     return (      
       <div className="input">
-
+        
         {i<maxCount && (<List values={chunk}/>)}
+        {i<maxCount && chunk.length != 1 && (<SplitInstruction/>)}
       </div> 
   );
   }
