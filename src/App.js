@@ -186,7 +186,7 @@ class App extends Component {
     super(props);
     this.state = {
       proceed: true,
-      maxCount: 1,
+      maxCount: 2,
     };
     
   }
@@ -219,7 +219,7 @@ class App extends Component {
           <button onClick = {() => this.handleClick()}>
             {"next step"}
           </button>
-          
+          <Instructions instruct = {steps[this.state.maxCount-2].instruction}/>
         </header>
       
         <section>
