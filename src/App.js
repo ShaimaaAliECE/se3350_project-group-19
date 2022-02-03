@@ -8,7 +8,8 @@ var stepCounter =0;
 var loopCounterIdx =0;
 var stepCounterCalled = false;
 var stepCounterCalledLoop = false;
-var array = generateRandomArray(10, 20);
+var arrayGlobal = generateRandomArray(10, 20);
+
 
 
 
@@ -187,7 +188,9 @@ class App extends Component {
       proceed: true,
       maxCount: 1,
     };
+    
   }
+
 
 
 
@@ -201,6 +204,7 @@ class App extends Component {
     });
   }
   render() {
+    let array = [...arrayGlobal];
     const arrayc = [...array];
     console.log(array);
     let steps = generateMergeSteps(arrayc);
