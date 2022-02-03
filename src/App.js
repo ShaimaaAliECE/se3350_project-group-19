@@ -1,7 +1,28 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import generateMergeSteps from "./temps";
 //Global variable to control flow
-var i =0;
+var stepCounter =0;
+var loopCounterIdx =0;
+var stepCounterCalled = false;
+var stepCounterCalledLoop = false;
+
+
+
+class Instructions extends Component {
+
+
+  render() {
+
+    return (
+      <div className="instructions">
+        <h3>
+          {this.props.instruct}
+        </h3>
+      </div>
+    );
+  }
+}
 
 class List extends Component {
   static propTypes = {
@@ -31,12 +52,22 @@ class Join extends Component {
     right: PropTypes.number.isRequired
   };
 
+  increaseStepCounterLoop(length, i){
+    if (i == length){
+        stepCounterCalledLoop = !stepCounterCalledLoop;
+        return;
+    }
+    if (stepCounterCalledLoop ==false)
+    { 
+      stepCounter++;
+    }
+    
+  }
   render() {
     const { array, left, right, mid, maxCount} = this.props;
-
+    
     const leftSorted = array.slice(left, mid);
     const rightSorted = array.slice(mid, right);
-    ++i;
 
     // here we mutate the array prop, so each component has access to the partial sorts
     // it's just a component communication, in real mergesort procedure, we wouldn't need this
@@ -45,7 +76,6 @@ class Join extends Component {
     while (leftSorted.length && rightSorted.length) {
       const [a] = leftSorted;
       const [b] = rightSorted;
-
       sorted.push(Math.min(a, b));
 
       sorted[sorted.length - 1] === a
@@ -55,9 +85,19 @@ class Join extends Component {
 
     sorted = [...sorted, ...leftSorted, ...rightSorted];
     sorted.forEach((x, i) => (array[left + i] = x));
+    
+    loopCounterIdx = stepCounter+1;
+    for (let i=0; i<= sorted.length; i++){
+      this.increaseStepCounterLoop(sorted.length, i);
+
+    }
+    let diff = maxCount-loopCounterIdx;
+    let onebyone = sorted.slice(0, diff);
+
+
     return (
       <div>
-      {i<maxCount && (<List values={sorted} />)}
+      {diff>0 && (<List values={onebyone} />)}
       </div>
     );
   }
@@ -74,7 +114,7 @@ class MergeSort extends Component {
 
 
   recurse () {
-
+    
     let { array, left, right, maxCount} = this.props;
     const chunk = array.slice(left, right);
     const mid = left + Math.floor(chunk.length / 2);
@@ -101,22 +141,31 @@ class MergeSort extends Component {
   }
 
 
-
+  increaseStepCounter(){
+    if (stepCounterCalled ==false)
+    { 
+      stepCounter++;
+      stepCounterCalled = true;
+    }
+    else
+      stepCounterCalled = false;
+  }
 
   nextStep () {
     const { array, left, right, maxCount } = this.props;
     const chunk = array.slice(left, right);
-    ++i;
+    this.increaseStepCounter();
+    
     return (      
       <div className="input">
 
-        {i<maxCount && (<List values={chunk}/>)}
+        {stepCounter<maxCount && (<List values={chunk}/>)}
       </div> 
   );
   }
 
   render() {
-
+    
     return (
         <div className="merge-sort">
           {this.nextStep()}
@@ -132,19 +181,27 @@ class App extends Component {
     super(props);
     this.state = {
       proceed: true,
-      maxCount: 2,
+      maxCount: 1,
     };
   }
 
+
+
+ 
+
   handleClick (){
-    i=0;
-    let newcount = this.state.maxCount +2;
+    stepCounter =0;
+    let newcount = this.state.maxCount +1;
     this.setState({
       maxCount: newcount
     });
   }
   render() {
-    const array = [8, 5, 4, 6, 7, 1, 3, 2,9];
+    let array = [8, 5, 4, 6, 1, 3, 2, 7];
+    let arrayc = [8, 5, 4, 6, 1, 3, 2, 7];
+    let steps = generateMergeSteps(arrayc);
+    console.log(steps);
+    
 
     return (
       <>
@@ -153,7 +210,9 @@ class App extends Component {
           <button onClick = {() => this.handleClick()}>
             {"next step"}
           </button>
+          
         </header>
+      
         <section>
 
 
