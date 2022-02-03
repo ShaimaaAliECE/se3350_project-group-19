@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import generateMergeSteps from "./temps";
+import generateMergeSteps from "./sort";
+import generateRandomArray from "./rand_array";
+
 //Global variable to control flow
 var stepCounter =0;
 var loopCounterIdx =0;
 var stepCounterCalled = false;
 var stepCounterCalledLoop = false;
+var array = generateRandomArray(10, 20);
 
 
 
@@ -23,6 +26,7 @@ class Instructions extends Component {
     );
   }
 }
+
 
 class List extends Component {
   static propTypes = {
@@ -197,10 +201,11 @@ class App extends Component {
     });
   }
   render() {
-    let array = [8, 5, 4, 6, 1, 3, 2, 7];
-    let arrayc = [8, 5, 4, 6, 1, 3, 2, 7];
+    const arrayc = [...array];
+    console.log(array);
     let steps = generateMergeSteps(arrayc);
     console.log(steps);
+    
     
 
     return (
