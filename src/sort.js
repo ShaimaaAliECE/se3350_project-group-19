@@ -9,6 +9,12 @@ function mergeSort(arr, num, steps)
 {
     if (arr.length == 1)
     {
+        steps.push({
+            stepType: 'split',
+            array: 0,
+            index: 0,
+            instruction: `One elemet left. Time to merge.`
+        });
         return arr;
     }
 

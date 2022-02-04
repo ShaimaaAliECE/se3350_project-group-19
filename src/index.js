@@ -1,5 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import "./index.scss";
 import { Formik, Field, Form } from 'formik';
 
 const Basic = () => (
