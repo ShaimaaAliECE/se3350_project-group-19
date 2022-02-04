@@ -4,7 +4,9 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { Formik, Field, Form } from 'formik';
 
-const Menu = () => (
+function Menu (){
+
+  return(
     <div>
       <h1 h1 style={{backgroundColor: "lightblue", padding: "10px"}}>Sortin'</h1>
   
@@ -82,5 +84,6 @@ const Menu = () => (
       </Formik>
     </div>
   );
+          }
   
   export default Menu

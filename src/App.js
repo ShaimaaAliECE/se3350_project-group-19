@@ -11,7 +11,7 @@ function App() {
   return (
     <div className = "App">
     <Routes>
-      <Route path="/" elemenet = {Menu} />
+      <Route path="/" exact element = {<Menu/>} />
       <Route path="/levelone" element = {<Level1/>} />
     </Routes>
     </div>
