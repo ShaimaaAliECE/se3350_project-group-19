@@ -12,7 +12,6 @@ var arrayGlobal = generateRandomArray(10, 20);
 
 
 
-
 class Instructions extends Component {
 
 
@@ -29,18 +28,66 @@ class Instructions extends Component {
 }
 
 
-class List extends Component {
+class ListSplit extends Component {
   static propTypes = {
     values: PropTypes.array.isRequired
   };
 
+  handleClick(values, value) {
+      if (values.length%2 == 0){
+        if (value == values[values.length/2-1] || value == values[values.length/2]){
+          console.log("correct split click");
+          this.props.incrementMaxCount();
+        }
+        else
+          console.log("wrong split click");
+      }
+      else{
+        if (value == values[Math.floor(values.length/2)]){
+          console.log("correct split click");
+          this.props.incrementMaxCount();
+        }
+        else
+          console.log("wrong split click");
+      }
+  }
+
   render() {
     const { values } = this.props;
+    console.log(values);
 
     return (
       <div className="list">
         {values.map(value => (
-          <code className="cell" key={value}>
+          <code className="cell" key={value} onClick = {() => {this.handleClick(values, value)}}>
+            {value}
+          </code>
+        ))}
+      </div>
+    );
+  }
+}
+
+class ListMerge extends Component {
+  static propTypes = {
+    values: PropTypes.array.isRequired
+  };
+
+  handleClick(values, value, correctMergeChoice) {
+      if (value == values[correctMergeChoice])
+        console.log("correct merge click");
+      else
+        console.log("wrong merge click");
+  }
+
+  render() {
+    const { values } = this.props;
+    console.log(values);
+
+    return (
+      <div className="list">
+        {values.map(value => (
+          <code className="cell" key={value} onClick = {() => {this.handleClick(values, value, this.props.correctMergeChoice)}}>
             {value}
           </code>
         ))}
@@ -102,7 +149,7 @@ class Join extends Component {
 
     return (
       <div>
-      {diff>0 && (<List values={onebyone} />)}
+      {diff>0 && (<ListMerge values={onebyone} correctMergeChoice = {diff} />)}
       </div>
     );
   }
@@ -164,8 +211,8 @@ class MergeSort extends Component {
     return (      
       <div className="input">
 
-        {stepCounter<maxCount && (<List values={chunk}/>)}
-      </div> 
+        {stepCounter<maxCount && (<ListSplit values={chunk} incrementMaxCount = {() => this.props.incrementMaxCount()} />)}
+      </div>
   );
   }
 
@@ -219,13 +266,13 @@ class App extends Component {
           <button onClick = {() => this.handleClick()}>
             {"next step"}
           </button>
-          <Instructions instruct = {steps[this.state.maxCount-2].instruction}/>
+          <Instructions instruct = {steps[Math.min(steps.length-1, this.state.maxCount-2)].instruction}/>
         </header>
       
         <section>
 
 
-          <MergeSort array={array} left={0} right={array.length} maxCount = {this.state.maxCount} />
+          <MergeSort array={array} left={0} right={array.length} maxCount = {this.state.maxCount} incrementMaxCount = {() => this.handleClick()}/>
         </section>
       </>
     );
