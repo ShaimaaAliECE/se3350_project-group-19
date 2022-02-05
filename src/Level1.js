@@ -262,7 +262,7 @@ class Level1 extends Component {
     return (
       <>
         <header>
-          <h1>Merge Sort Game</h1>
+          <h1>Sortin' Level 1</h1>
           <button onClick = {() => this.handleClick()}>
             {"next step"}
           </button>
