@@ -128,7 +128,7 @@ class MergeSort extends Component {
   }
 }
 
-class App extends Component {
+class Level2 extends Component {
 
   constructor(props) {
     super(props);
@@ -170,4 +170,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Level2;
