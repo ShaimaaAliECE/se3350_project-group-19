@@ -25,7 +25,7 @@ function mergeSort(arr, num, steps)
         stepType: 'split',
         array: num,
         index: middle,
-        instruction: `Split the ${num == 0 ? 'left' : 'right'} array before the ${getOrdinal(middle)} element.`
+        instruction: `Split the ${num == 0 ? 'left' : 'right'} array after the ${getOrdinal(middle)} element.`
     });
 
     leftHalf = mergeSort(leftHalf, 0, steps);
