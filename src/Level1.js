@@ -261,7 +261,7 @@ class Level1 extends Component {
     //console.log(steps);
 
     // Check for level completion
-    if (this.state.maxCount > steps.length)
+    if (this.state.maxCount >= steps.length)
     {
       console.log('Level Complete');
     }
