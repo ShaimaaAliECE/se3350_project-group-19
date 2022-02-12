@@ -5,7 +5,7 @@ import generateRandomArray from "./rand_array";
 import Level1 from "./Level1.js";
 import { Routes, Route, Link } from "react-router-dom";
 import Menu from "./Menu.js"
-import Level2 from "./Lvl2Test.js";
+import Level2 from "./Level2.js";
 
 //Global variable to control flow
 function App() {
