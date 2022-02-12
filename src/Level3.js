@@ -143,7 +143,7 @@ class MergeSort extends Component {
 
 
 
-class Level2 extends Component {
+class Level3 extends Component {
 
   constructor(props) {
     super(props);
@@ -172,8 +172,7 @@ class Level2 extends Component {
     return (
       <>
         <header>
-          <h1>Sortin' Level 2</h1>
-          <Instructions instruct = {steps[Math.min(steps.length-1, this.state.maxCount-2)].instruction}/>
+          <h1>Sortin' Level 3</h1>
         </header>
       
         <section>
@@ -186,4 +185,4 @@ class Level2 extends Component {
   }
 }
 
-export default Level2;
+export default Level3;

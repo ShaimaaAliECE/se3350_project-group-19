@@ -1,108 +1,19 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import generateMergeSteps from "./sort";
 import generateRandomArray from "./rand_array";
+import Instructions from "./Instructions";
+import ListSplit from "./ListSplit";
+import ListMerge from "./ListMerge";
 
 //Global variable to control flow
 var stepCounter =0;
 var loopCounterIdx =0;
 var stepCounterCalled = false;
 var stepCounterCalledLoop = false;
-var arrayGlobal = generateRandomArray(10, 20);
+var arrayGlobal = generateRandomArray(8, 20);
 
-
-
-class Instructions extends Component {
-
-
-  render() {
-
-    return (
-      <div className="instructions">
-        <h3>
-          {this.props.instruct}
-        </h3>
-      </div>
-    );
-  }
-}
-
-
-class ListSplit extends Component {
-  static propTypes = {
-    values: PropTypes.array.isRequired
-  };
-
-  handleClick(values, value) {
-      if (values.length%2 == 0){
-        if (value == values[values.length/2-1] || value == values[values.length/2]){
-          console.log("correct split click");
-          this.props.incrementMaxCount();
-        }
-        else
-          console.log("wrong split click");
-      }
-      else{
-        if (value == values[Math.floor(values.length/2)]){
-          console.log("correct split click");
-          this.props.incrementMaxCount();
-        }
-        else
-          console.log("wrong split click");
-      }
-  }
-
-  render() {
-    const { values } = this.props;
-    console.log(values);
-
-    return (
-      <div className="list">
-        {values.map(value => (
-          <code className="cell" key={value} onClick = {() => {this.handleClick(values, value)}}>
-            {value}
-          </code>
-        ))}
-      </div>
-    );
-  }
-}
-
-class ListMerge extends Component {
-  static propTypes = {
-    values: PropTypes.array.isRequired
-  };
-
-  handleClick(values, value, correctMergeChoice) {
-      if (value == values[correctMergeChoice])
-        console.log("correct merge click");
-      else
-        console.log("wrong merge click");
-  }
-
-  render() {
-    const { values } = this.props;
-    console.log(values);
-
-    return (
-      <div className="list">
-        {values.map(value => (
-          <code className="cell" key={value} onClick = {() => {this.handleClick(values, value, this.props.correctMergeChoice)}}>
-            {value}
-          </code>
-        ))}
-      </div>
-    );
-  }
-}
 
 class Join extends Component {
-  static propTypes = {
-    array: PropTypes.array.isRequired,
-    left: PropTypes.number.isRequired,
-    mid: PropTypes.number.isRequired,
-    right: PropTypes.number.isRequired
-  };
 
   increaseStepCounterLoop(length, i){
     if (i == length){
@@ -149,83 +60,88 @@ class Join extends Component {
 
     return (
       <div>
-      {diff>0 && (<ListMerge values={onebyone} correctMergeChoice = {diff} />)}
+      {diff>0 && (<ListMerge  values={onebyone} incrementMaxCount = {() => this.props.incrementMaxCount()} maxCount = {maxCount} levelOfRecursion = {this.props.levelOfRecursion} steps = {this.props.steps}/>)}
       </div>
     );
   }
 }
 
 class MergeSort extends Component {
-
-
-  static propTypes = {
-    array: PropTypes.array.isRequired,
-    left: PropTypes.number.isRequired,
-    right: PropTypes.number.isRequired
-  };
-
-
-  recurse () {
-    
-    let { array, left, right, maxCount} = this.props;
-    const chunk = array.slice(left, right);
-    const mid = left + Math.floor(chunk.length / 2);
-
-    
-
- 
-    return(
-      <div>
-         
-        {chunk.length !=1 && (
-         
-          <>
-            <MergeSort {...this.props} right={mid} currCount = {0} />
-            <MergeSort {...this.props} left={mid} currCount = {0}   />
-            <div className="join">
-              <Join {...this.props} mid={mid} currCount = {0} />
-            </div>
+  
+    recurse () {
+      
+      let { array, left, right, maxCount} = this.props;
+      const chunk = array.slice(left, right);
+      const mid = left + Math.floor(chunk.length / 2);
+  
+      
+  
+   
+      return(
+        <div>
            
-          </>
-        )}
-      </div>
-    );
-  }
-
-
-  increaseStepCounter(){
-    if (stepCounterCalled ==false)
-    { 
-      stepCounter++;
-      stepCounterCalled = true;
-    }
-    else
-      stepCounterCalled = false;
-  }
-
-  nextStep () {
-    const { array, left, right, maxCount } = this.props;
-    const chunk = array.slice(left, right);
-    this.increaseStepCounter();
-    
-    return (      
-      <div className="input">
-
-        {stepCounter<maxCount && (<ListSplit values={chunk} incrementMaxCount = {() => this.props.incrementMaxCount()} />)}
-      </div>
-  );
-  }
-
-  render() {
-    
-    return (
-        <div className="merge-sort">
-          {this.nextStep()}
-          {this.recurse()}
+          {chunk.length !=1 && (
+           
+            <>
+              <MergeSort {...this.props} right={mid} currCount = {0} levelOfRecursion = {this.props.levelOfRecursion +1} />
+              <MergeSort {...this.props} left={mid} currCount = {0} levelOfRecursion = {this.props.levelOfRecursion +1}   />
+              <div className="join">
+                <Join {...this.props} mid={mid} currCount = {0} levelOfRecursion = {this.props.levelOfRecursion-1}  />
+              </div>
+             
+            </>
+          )}
         </div>
-    );
+      );
+    }
+  
+  
+    increaseStepCounter(){
+      if (stepCounterCalled ==false)
+      { 
+        stepCounter++;
+        stepCounterCalled = true;
+      }
+      else
+        stepCounterCalled = false;
+    }
+  
+    nextStep () {
+      const { array, left, right, maxCount } = this.props;
+      const chunk = array.slice(left, right);
+      this.increaseStepCounter();
+      if (chunk.length>1){
+        return (      
+          <div className="input">
+  
+            {stepCounter<maxCount && (<ListSplit values={chunk} incrementMaxCount = {() => this.props.incrementMaxCount()} maxCount = {maxCount} levelOfRecursion = {this.props.levelOfRecursion} steps = {this.props.steps}  />)}
+          </div>
+        );
+      }
+      else{
+        return (      
+          <div className="input">
+  
+            {stepCounter<maxCount && (<ListMerge values={chunk} incrementMaxCount = {() => this.props.incrementMaxCount()} maxCount = {maxCount} levelOfRecursion = {this.props.levelOfRecursion-1} steps = {this.props.steps} />)}
+          </div>
+        );
+  
+      }
+    }
+  
+    render() {
+      
+      return (
+          <div className="merge-sort">
+            {this.nextStep()}
+            {this.recurse()}
+          </div>
+      );
+    }
   }
-}
+
+
+
 
 class Level1 extends Component {
 
@@ -238,11 +154,6 @@ class Level1 extends Component {
     
   }
 
-
-
-
- 
-
   handleClick (){
     stepCounter =0;
     let newcount = this.state.maxCount +1;
@@ -253,7 +164,6 @@ class Level1 extends Component {
   render() {
     let array = [...arrayGlobal];
     const arrayc = [...array];
-    console.log(array);
     let steps = generateMergeSteps(arrayc);
     console.log(steps);
     
@@ -272,7 +182,7 @@ class Level1 extends Component {
         <section>
 
 
-          <MergeSort array={array} left={0} right={array.length} maxCount = {this.state.maxCount} incrementMaxCount = {() => this.handleClick()}/>
+          <MergeSort array={array} left={0} right={array.length} maxCount = {this.state.maxCount} incrementMaxCount = {() => {}} steps = {steps} levelOfRecursion={0}/>
         </section>
       </>
     );
