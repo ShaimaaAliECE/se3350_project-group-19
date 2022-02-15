@@ -161,6 +161,15 @@ class Level3 extends Component {
       maxCount: newcount
     });
   }
+
+  reset() {
+    stepCounter = 0;
+    this.setState({
+      maxCount: 2
+    });
+    console.log('reset');
+  }
+
   render() {
     let array = [...arrayGlobal];
     const arrayc = [...array];
@@ -173,6 +182,7 @@ class Level3 extends Component {
       <>
         <header>
           <h1>Sortin' Level 3</h1>
+          <button onClick={() => this.reset()}>Reset Level</button>
         </header>
       
         <section>
