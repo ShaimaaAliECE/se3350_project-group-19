@@ -119,6 +119,12 @@ function generateMergeSteps(arr)
 {
     let steps = [];
     arr = mergeSort(arr, 0, steps);
+    steps.push({
+        stepType: 'done',
+        array: 0,
+        index: 0,
+        instruction: 'The array is sorted. Level complete!'
+    });
     return steps;
 }
 
@@ -147,6 +153,6 @@ function getOrdinal(n)
     
 }
 
-console.log(generateMergeSteps([12, 8, 31, 42, 4, 5, 15, 32, 5, 28]));
+//console.log(generateMergeSteps([12, 8, 31, 42, 4, 5, 15, 32, 5, 28]));
 
 export default generateMergeSteps;

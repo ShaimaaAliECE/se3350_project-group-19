@@ -56,10 +56,10 @@ class ListSplit extends Component {
 
   render() {
     const { values } = this.props;
-    console.log(values);
+    //console.log(values);
 
     return (
-      <div className="list">
+      <div className={'list ' + this.props.side + '-array'}>
         {values.map(value => (
           <code className="cell" key={value} onClick={() => { this.handleClick(values, value) }}>
             {value}
@@ -84,7 +84,7 @@ class ListMerge extends Component {
 
   render() {
     const { values } = this.props;
-    console.log(values);
+    //console.log(values);
 
     return (
       <div className="list">
@@ -164,7 +164,8 @@ class MergeSort extends Component {
     left: PropTypes.number.isRequired,
     right: PropTypes.number.isRequired
   };
-
+  
+  
 
   recurse() {
 
@@ -181,8 +182,8 @@ class MergeSort extends Component {
         {chunk.length != 1 && (
 
           <>
-            <MergeSort {...this.props} right={mid} currCount={0} />
-            <MergeSort {...this.props} left={mid} currCount={0} />
+            <MergeSort {...this.props} right={mid} currCount = {0} side='left' />
+            <MergeSort {...this.props} left={mid} currCount = {0} side='right'   />
             <div className="join">
               <Join {...this.props} mid={mid} currCount={0} />
             </div>
@@ -210,8 +211,7 @@ class MergeSort extends Component {
 
     return (
       <div className="input">
-
-        {stepCounter < maxCount && (<ListSplit values={chunk} incrementMaxCount={() => this.props.incrementMaxCount()} />)}
+        {stepCounter<maxCount && (<ListSplit side={this.props.side} values={chunk} incrementMaxCount = {() => this.props.incrementMaxCount()} />)}
       </div>
     );
   }
@@ -249,15 +249,29 @@ class Level1 extends Component {
     this.setState({
       maxCount: newcount
     });
+    //console.log(stepCounter);
+    console.log(this.state.maxCount);
   }
+  reset() {
+    this.setState({
+      maxCount: 2
+    });
+    console.log('reset');
+  }
+
   render() {
     let array = [...arrayGlobal];
     const arrayc = [...array];
-    console.log(array);
+    //console.log(array);
     let steps = generateMergeSteps(arrayc);
-    console.log(steps);
+    //console.log(steps);
 
-
+    // Check for level completion
+    if (this.state.maxCount >= steps.length)
+    {
+      console.log('Level Complete');
+    }
+    
 
     return (
       <>
@@ -272,7 +286,10 @@ class Level1 extends Component {
           <button onClick={() => this.handleClick()}>
             {"next step"}
           </button>
-          <Instructions instruct={steps[Math.min(steps.length - 1, this.state.maxCount - 2)].instruction} />
+
+          <button onClick = {() => this.reset()}>Reset</button>
+          <Instructions instruct = {steps[Math.min(steps.length-1, this.state.maxCount-2)].instruction}/>
+
         </header>
 
         <section>
