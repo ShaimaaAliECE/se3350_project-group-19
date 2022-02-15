@@ -33,7 +33,7 @@ function mergeSort(arr, num, steps, level)
         index: middle,
         levelOfRecursion: level,
         clickValue: arrCopy[middle],
-        instruction: `Split the ${(level == 0 ? 'top' : (num == 0 ? 'left' : 'right'))} array after the ${getOrdinal(middle+1)} element.`
+        instruction: `Split the ${(level == 0 ? 'top' : (num == 0 ? 'left' : 'right'))} array after the ${getOrdinal(middle)} element.`
     });
     arr = mergeSort(arr, 1, steps, level +1);
 
