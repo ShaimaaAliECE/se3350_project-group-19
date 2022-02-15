@@ -11,6 +11,7 @@ var loopCounterIdx =0;
 var stepCounterCalled = false;
 var stepCounterCalledLoop = false;
 var arrayGlobal = generateRandomArray(10, 20);
+var totalSteps = 0;
 
 
 class Join extends Component {
@@ -150,6 +151,7 @@ class Level3 extends Component {
     this.state = {
       proceed: true,
       maxCount: 2,
+      complete: false
     };
     
   }
@@ -157,15 +159,18 @@ class Level3 extends Component {
   handleClick (){
     stepCounter =0;
     let newcount = this.state.maxCount +1;
+    let end = newcount > totalSteps;
     this.setState({
-      maxCount: newcount
+      maxCount: newcount,
+      complete: end
     });
   }
 
   reset() {
     stepCounter = 0;
     this.setState({
-      maxCount: 2
+      maxCount: 2,
+      complete: false
     });
     console.log('reset');
   }
@@ -175,6 +180,7 @@ class Level3 extends Component {
     const arrayc = [...array];
     let steps = generateMergeSteps(arrayc);
     console.log(steps);
+    totalSteps = steps.length;
     
     
 
@@ -183,6 +189,7 @@ class Level3 extends Component {
         <header>
           <h1>Sortin' Level 3</h1>
           <button onClick={() => this.reset()}>Reset Level</button>
+          {this.state.complete && <h2>The array is sorted. Level complete!</h2> }
         </header>
       
         <section>
