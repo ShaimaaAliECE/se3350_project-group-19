@@ -10,7 +10,7 @@ var stepCounter =0;
 var loopCounterIdx =0;
 var stepCounterCalled = false;
 var stepCounterCalledLoop = false;
-var arrayGlobal = generateRandomArray(8, 20);
+var arrayGlobal = generateRandomArray(10, 20);
 
 
 class Join extends Component {
