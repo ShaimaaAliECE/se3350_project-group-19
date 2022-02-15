@@ -60,6 +60,7 @@ function Menu (){
                 <Field as="select" name="level" size="3">
                 <option value="one">Level 1</option>
                 <option value="two">Level 2</option>
+                <option value="three">Level 3</option>
                 {/* <option value="three">Level 3</option> */}
                 </Field>
               </label>

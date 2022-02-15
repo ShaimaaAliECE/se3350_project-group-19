@@ -143,7 +143,7 @@ class MergeSort extends Component {
 
 
 
-class Level1 extends Component {
+class Level2 extends Component {
 
   constructor(props) {
     super(props);
@@ -160,48 +160,30 @@ class Level1 extends Component {
     this.setState({
       maxCount: newcount
     });
-    //console.log(stepCounter);
-    console.log(this.state.maxCount);
   }
-  reset() {
-    this.setState({
-      maxCount: 2
-    });
-    console.log('reset');
-  }
-
   render() {
     let array = [...arrayGlobal];
     const arrayc = [...array];
     let steps = generateMergeSteps(arrayc);
-    //console.log(steps);
-
-    // Check for level completion
-    if (this.state.maxCount >= steps.length)
-    {
-      console.log('Level Complete');
-    }
+    console.log(steps);
+    
     
 
     return (
       <>
         <header>
-          <h1>Sortin' Level 1</h1>
-          <button onClick = {() => this.handleClick()}>
-            {"next step"}
-          </button>
-          <button onClick = {() => this.reset()}>Reset</button>
+          <h1>Sortin' Level 2</h1>
           <Instructions instruct = {steps[Math.min(steps.length-1, this.state.maxCount-2)].instruction}/>
         </header>
       
         <section>
 
 
-          <MergeSort array={array} left={0} right={array.length} maxCount = {this.state.maxCount} incrementMaxCount = {() => {}} steps = {steps} levelOfRecursion={0}/>
+          <MergeSort array={array} left={0} right={array.length} maxCount = {this.state.maxCount} incrementMaxCount = {() => this.handleClick()} steps = {steps} levelOfRecursion={0}/>
         </section>
       </>
     );
   }
 }
 
-export default Level1;
+export default Level2;
