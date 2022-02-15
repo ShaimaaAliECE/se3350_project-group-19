@@ -7,6 +7,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import Menu from "./Menu.js"
 import Level2 from "./Lvl2Test.js";
 
+
 //Global variable to control flow
 function App() {
   return (

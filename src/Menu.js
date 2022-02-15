@@ -4,12 +4,11 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { Formik, Field, Form } from 'formik';
 
-function Menu (){
-
-  return(
+function Menu() {
+  return (
     <div>
-      <h1 h1 style={{backgroundColor: "lightblue", padding: "10px"}}>Sortin'</h1>
-  
+      <h1 h1 style={{ backgroundColor: "lightblue", padding: "10px" }}>Sortin'</h1>
+
       <Formik
         initialValues={{
           level: 'one',
@@ -18,16 +17,16 @@ function Menu (){
         onSubmit={async (values) => {
           await new Promise((r) => setTimeout(r, 500));
           // alert(JSON.stringify(values, null, 2));
-  
+
           // window.location.href = "http://google.com"
           // window.location.replace("http://localhost:5500/src/level" + values.level + ".html");
-           window.location.href = "http://localhost:3000/level" + values.level 
+          window.location.href = "http://localhost:3000/level" + values.level
           // return false;
         }}
       >
         <body>
-        <Form>
-          {/* Radio Button Idea */}
+          <Form>
+            {/* Radio Button Idea */}
             {/* <div id="my-radio-group">Choose a Level: </div>
             <div role="group" aria-labelledby="my-radio-group">
               <label>
@@ -53,37 +52,37 @@ function Menu (){
             </div>
   
             <br />*/}
-  
+
             <div id="levelSelect">Choose a Level: </div>
             <div role="group">
               <label>
                 <Field as="select" name="level" size="3">
-                <option value="one">Level 1</option>
-                <option value="two">Level 2</option>
-                {/* <option value="three">Level 3</option> */}
+                  <option value="one">Level 1</option>
+                  <option value="two">Level 2</option>
+                  {/* <option value="three">Level 3</option> */}
                 </Field>
               </label>
             </div>
-  
+
             <br />
-  
+
             <div id="algorithmSelect">Choose a Sorting Algorithm: </div>
             <div role="group">
               <label>
                 <Field as="select" name="algorithm" size="3">
-                <option value="mergeSort">Merge Sort</option>
+                  <option value="mergeSort">Merge Sort</option>
                 </Field>
               </label>
             </div>
-            
+
             <br />
-  
+
             <button type="submit">Submit</button>
           </Form>
-          </body>
+        </body>
       </Formik>
     </div>
   );
-          }
-  
-  export default Menu
+}
+
+export default Menu
