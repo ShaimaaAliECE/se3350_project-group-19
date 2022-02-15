@@ -164,7 +164,7 @@ class MergeSort extends Component {
     right: PropTypes.number.isRequired
   };
   
-
+  
 
   recurse () {
     
@@ -253,6 +253,13 @@ class Level1 extends Component {
     //console.log(stepCounter);
     console.log(this.state.maxCount);
   }
+  reset() {
+    this.setState({
+      maxCount: 2
+    });
+    console.log('reset');
+  }
+
   render() {
     let array = [...arrayGlobal];
     const arrayc = [...array];
@@ -274,6 +281,7 @@ class Level1 extends Component {
           <button onClick = {() => this.handleClick()}>
             {"next step"}
           </button>
+          <button onClick = {() => this.reset()}>Reset</button>
           <Instructions instruct = {steps[Math.min(steps.length-1, this.state.maxCount-2)].instruction}/>
         </header>
       
