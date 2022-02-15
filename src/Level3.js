@@ -172,6 +172,9 @@ class Level3 extends Component {
     return (
       <>
         <header>
+          <form action="/">
+            <input type="submit" value="Quit" />
+          </form>
           <h1>Sortin' Level 3</h1>
         </header>
       
