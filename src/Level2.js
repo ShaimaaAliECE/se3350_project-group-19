@@ -162,6 +162,15 @@ class Level2 extends Component {
       maxCount: newcount
     });
   }
+
+  reset() {
+    stepCounter = 0;
+    this.setState({
+      maxCount: 2
+    });
+    console.log('reset');
+  }
+
   render() {
     let array = [...arrayGlobal];
     const arrayc = [...array];
@@ -175,10 +184,12 @@ class Level2 extends Component {
         <header>
 
           <h1>Sortin' Level 2</h1>
+      
           <form action="/">
             <input type="submit" value="Quit" />
           </form>
-          <GoBackList/>
+          <button onClick = {() => this.reset()}>Reset Level</button>
+
           <Instructions instruct = {steps[Math.min(steps.length-1, this.state.maxCount-2)].instruction}/>
         </header>
       
