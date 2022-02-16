@@ -4,6 +4,7 @@ import generateRandomArray from "./rand_array";
 import Instructions from "./Instructions";
 import ListSplit from "./ListSplit";
 import ListMerge from "./ListMerge";
+import GoBackList from "./GoBackList"
 
 //Global variable to control flow
 var stepCounter =0;
@@ -181,8 +182,14 @@ class Level2 extends Component {
     return (
       <>
         <header>
+
           <h1>Sortin' Level 2</h1>
+      
+          <form action="/">
+            <input type="submit" value="Quit" />
+          </form>
           <button onClick = {() => this.reset()}>Reset Level</button>
+
           <Instructions instruct = {steps[Math.min(steps.length-1, this.state.maxCount-2)].instruction}/>
         </header>
       

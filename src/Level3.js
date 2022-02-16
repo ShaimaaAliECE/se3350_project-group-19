@@ -4,6 +4,7 @@ import generateRandomArray from "./rand_array";
 import Instructions from "./Instructions";
 import ListSplit from "./ListSplit";
 import ListMerge from "./ListMerge";
+import GoBackList from "./GoBackList"
 
 //Global variable to control flow
 var stepCounter =0;
@@ -188,6 +189,10 @@ class Level3 extends Component {
       <>
         <header>
           <h1>Sortin' Level 3</h1>
+          <GoBackList/>
+          <form action="/">
+            <input type="submit" value="Quit" />
+          </form>
           <button onClick={() => this.reset()}>Reset Level</button>
           {this.state.complete && <h2>The array is sorted. Level complete!</h2> }
         </header>

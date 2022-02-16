@@ -189,10 +189,17 @@ class Level1 extends Component {
       <>
         <header>
           <h1>Sortin' Level 1</h1>
+          
           <button onClick = {() => this.handleClick()}>
             {"next step"}
           </button>
-          <button onClick = {() => this.reset()}>Reset Level</button>
+
+          <button onClick = {() => this.reset()}>Reset</button>
+
+          <form action="/">
+            <input type="submit" value="Quit" />
+          </form>
+
           <Instructions instruct = {steps[Math.min(steps.length-1, this.state.maxCount-2)].instruction}/>
         </header>
       
