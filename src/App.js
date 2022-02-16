@@ -5,7 +5,8 @@ import generateRandomArray from "./rand_array";
 import Level1 from "./Level1.js";
 import { Routes, Route, Link } from "react-router-dom";
 import Menu from "./Menu.js"
-import Level2 from "./Lvl2Test.js";
+import Level2 from "./Level2.js";
+import Level3 from "./Level3";
 
 
 //Global variable to control flow
@@ -16,6 +17,7 @@ function App() {
       <Route path="/" exact element = {<Menu/>} />
       <Route path="/levelone" element = {<Level1/>} />
       <Route path="/leveltwo" element = {<Level2/>} />
+      <Route path="/levelthree" element = {<Level3/>} />
     </Routes>
     </div>
   );

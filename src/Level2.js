@@ -4,30 +4,32 @@ import generateRandomArray from "./rand_array";
 import Instructions from "./Instructions";
 import ListSplit from "./ListSplit";
 import ListMerge from "./ListMerge";
-
-import Timer from "./timer";
+import GoBackList from "./GoBackList"
 
 //Global variable to control flow
-var stepCounter = 0;
-var loopCounterIdx = 0;
+var stepCounter =0;
+var loopCounterIdx =0;
 var stepCounterCalled = false;
 var stepCounterCalledLoop = false;
 var arrayGlobal = generateRandomArray(10, 20);
+
+
 class Join extends Component {
 
-  increaseStepCounterLoop(length, i) {
-    if (i == length) {
-      stepCounterCalledLoop = !stepCounterCalledLoop;
-      return;
+  increaseStepCounterLoop(length, i){
+    if (i == length){
+        stepCounterCalledLoop = !stepCounterCalledLoop;
+        return;
     }
-    if (stepCounterCalledLoop == false) {
+    if (stepCounterCalledLoop ==false)
+    { 
       stepCounter++;
     }
-
+    
   }
   render() {
-    const { array, left, right, mid, maxCount } = this.props;
-
+    const { array, left, right, mid, maxCount} = this.props;
+    
     const leftSorted = array.slice(left, mid);
     const rightSorted = array.slice(mid, right);
 
@@ -47,19 +49,19 @@ class Join extends Component {
 
     sorted = [...sorted, ...leftSorted, ...rightSorted];
     sorted.forEach((x, i) => (array[left + i] = x));
-
-    loopCounterIdx = stepCounter + 1;
-    for (let i = 0; i <= sorted.length; i++) {
+    
+    loopCounterIdx = stepCounter+1;
+    for (let i=0; i<= sorted.length; i++){
       this.increaseStepCounterLoop(sorted.length, i);
 
     }
-    let diff = maxCount - loopCounterIdx;
+    let diff = maxCount-loopCounterIdx;
     let onebyone = sorted.slice(0, diff);
 
 
     return (
       <div>
-        {diff>0 && (<ListMerge  values={onebyone} incrementMaxCount = {() => this.props.incrementMaxCount()} maxCount = {maxCount} levelOfRecursion = {this.props.levelOfRecursion} steps = {this.props.steps}/>)}
+      {diff>0 && (<ListMerge  values={onebyone} incrementMaxCount = {() => this.props.incrementMaxCount()} maxCount = {maxCount} levelOfRecursion = {this.props.levelOfRecursion} steps = {this.props.steps}/>)}
       </div>
     );
   }
@@ -72,6 +74,9 @@ class MergeSort extends Component {
       let { array, left, right, maxCount} = this.props;
       const chunk = array.slice(left, right);
       const mid = left + Math.floor(chunk.length / 2);
+  
+      
+  
    
       return(
         <div>
@@ -139,7 +144,7 @@ class MergeSort extends Component {
 
 
 
-class Level1 extends Component {
+class Level2 extends Component {
 
   constructor(props) {
     super(props);
@@ -147,7 +152,7 @@ class Level1 extends Component {
       proceed: true,
       maxCount: 2,
     };
-
+    
   }
 
   handleClick (){
@@ -156,8 +161,6 @@ class Level1 extends Component {
     this.setState({
       maxCount: newcount
     });
-    //console.log(stepCounter);
-    console.log(this.state.maxCount);
   }
 
   reset() {
@@ -172,47 +175,32 @@ class Level1 extends Component {
     let array = [...arrayGlobal];
     const arrayc = [...array];
     let steps = generateMergeSteps(arrayc);
-    //console.log(steps);
-
-    // Check for level completion
-    if (this.state.maxCount >= steps.length)
-    {
-      console.log('Level Complete');
-      isRunning = false; // Stop Timer
-      console.log("Timer: " + isRunning);
-    }
-
+    console.log(steps);
+    
+    
 
     return (
       <>
         <header>
-          <h1 h1 style={{ backgroundColor: "lightblue", padding: "10px" }}>Sortin'</h1>
-          <h1>Sortin' Level 1</h1>
-          
-          <br></br>
-          <Timer></Timer>
-          <br></br>
 
-          <button onClick={() => this.handleClick()}>
-            {"next step"}
-          </button>
-
-          <button onClick = {() => this.reset()}>Reset</button>
-
+          <h1>Sortin' Level 2</h1>
+          <GoBackList/>
           <form action="/">
             <input type="submit" value="Quit" />
           </form>
+          <button onClick = {() => this.reset()}>Reset Level</button>
 
           <Instructions instruct = {steps[Math.min(steps.length-1, this.state.maxCount-2)].instruction}/>
-
         </header>
-
+      
         <section>
-          <MergeSort array={array} left={0} right={array.length} maxCount = {this.state.maxCount} incrementMaxCount = {() => {}} steps = {steps} levelOfRecursion={0}/>
+
+
+          <MergeSort array={array} left={0} right={array.length} maxCount = {this.state.maxCount} incrementMaxCount = {() => this.handleClick()} steps = {steps} levelOfRecursion={0}/>
         </section>
       </>
     );
   }
 }
 
-export default Level1;
+export default Level2;

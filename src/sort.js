@@ -5,33 +5,39 @@
  * @param {Array} steps The array into which the sorting steps will be added
  * @returns 
  */
-function mergeSort(arr, num, steps)
+function mergeSort(arr, num, steps, level)
 {
     if (arr.length == 1)
     {
-        steps.push({
-            stepType: 'split',
-            array: 0,
-            index: 0,
-            instruction: `One elemet left. Time to merge.`
-        });
         return arr;
     }
 
+    let arrCopy = [...arr];
     let middle = Math.floor(arr.length / 2);
     let leftHalf = arr.splice(0, middle);
 
     steps.push({
-        stepType: 'split',
+        stepType: 'split left',
         array: num,
         index: middle,
-        instruction: `Split the ${num == 0 ? 'left' : 'right'} array after the ${getOrdinal(middle)} element.`
+        levelOfRecursion: level,
+        clickValue: arrCopy[middle-1],
+        instruction: `Split the ${(level == 0 ? 'top' : (num == 0 ? 'left' : 'right'))} array before the ${getOrdinal(middle+1)} element.`
     });
 
-    leftHalf = mergeSort(leftHalf, 0, steps);
-    arr = mergeSort(arr, 1, steps);
+    leftHalf = mergeSort(leftHalf, 0, steps, level +1);
 
-    return merge(leftHalf, arr, steps);
+    steps.push({
+        stepType: 'split right',
+        array: num,
+        index: middle,
+        levelOfRecursion: level,
+        clickValue: arrCopy[middle],
+        instruction: `Split the ${(level == 0 ? 'top' : (num == 0 ? 'left' : 'right'))} array after the ${getOrdinal(middle)} element.`
+    });
+    arr = mergeSort(arr, 1, steps, level +1);
+
+    return merge(leftHalf, arr, steps, level);
 }
 
 /**
@@ -41,7 +47,7 @@ function mergeSort(arr, num, steps)
  * @param {Array} steps The array into which the sorting steps will be added
  * @returns An array containing the sorted contents of the left and right arrays
  */
-function merge(left, right, steps)
+function merge(left, right, steps, level)
 {
     let arr = [];
     let leftIndex = 0;
@@ -52,21 +58,27 @@ function merge(left, right, steps)
         // Compare the first elements of both arrays, append the smaller one to arr and delete it from its array
         if (left[0] < right[0])
         {
+            let clickValue = left[0];
             arr.push(left.shift());
             steps.push({
                 stepType: 'merge',
                 array: 0,
                 index: leftIndex++,
+                levelOfRecursion: level,
+                clickValue: clickValue,
                 instruction: `Out of the first elements of both arrays, choose the smaller one and move it to the new array.`
             });
         }
         else
         {
+            let clickValue = right[0];
             arr.push(right.shift());
             steps.push({
                 stepType: 'merge',
                 array: 1,
                 index: rightIndex++,
+                levelOfRecursion: level,
+                clickValue: clickValue,
                 instruction: `Out of the first elements of both arrays, choose the smaller one and move it to the new array.`
             });
         }
@@ -77,11 +89,14 @@ function merge(left, right, steps)
     {
         for (let i of left)
         {
+            let clickValue = i;
             arr.push(i);
             steps.push({
                 stepType: 'merge',
                 array: 0,
                 index: leftIndex++,
+                levelOfRecursion: level,
+                clickValue: clickValue,
                 instruction: `The right array is empty, so move the remaining elements of the left array into the new array starting with the first one.`
             });
         }
@@ -91,11 +106,14 @@ function merge(left, right, steps)
     {
         for (let i of right)
         {
+            let clickValue = i;
             arr.push(i);
             steps.push({
                 stepType: 'merge',
                 array: 1,
                 index: rightIndex++,
+                levelOfRecursion: level,
+                clickValue: clickValue,
                 instruction: `The left array is empty, so move the remaining elements of the right array into the new array starting with the first one.`
             });
         }
@@ -118,7 +136,7 @@ function merge(left, right, steps)
 function generateMergeSteps(arr)
 {
     let steps = [];
-    arr = mergeSort(arr, 0, steps);
+    arr = mergeSort(arr, 0, steps, 0);
     steps.push({
         stepType: 'done',
         array: 0,
