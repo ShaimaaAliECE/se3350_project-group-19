@@ -184,7 +184,7 @@ class Level2 extends Component {
         <header>
 
           <h1>Sortin' Level 2</h1>
-      
+          <GoBackList/>
           <form action="/">
             <input type="submit" value="Quit" />
           </form>
