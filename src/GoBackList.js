@@ -4,26 +4,26 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { Formik, Field, Form } from 'formik';
 
-function levelDetect(props) {
-    let url = window.location.href
+// function levelDetect(props) {
+//     let url = window.location.href
 
-    if (url == "localhost:3000/leveltwo"){
-        return (
-            <div>
-                <option value="one">Level 1</option>
-            </div>
-        )
-    }
-    if (url == "localhost:3000/levelthree"){
-        return (
-            <div>
-                <option value="one">Level 1</option>
-                <option value="two">Level 2</option>
-            </div>
-        )
-    }
+//     if (url == "localhost:3000/leveltwo"){
+//         return (
+//             <div>
+//                 <option value="one">Level 1</option>
+//             </div>
+//         )
+//     }
+//     if (url == "localhost:3000/levelthree"){
+//         return (
+//             <div>
+//                 <option value="one">Level 1</option>
+//                 <option value="two">Level 2</option>
+//             </div>
+//         )
+//     }
 
-}
+// }
 
 function GoBackList (){
 console.log(window.location.href)
