@@ -16,7 +16,6 @@ class TimerComponent extends Component {
         this.setState({
             timerOn: on
         });
-        console.log('Timer stopped');
     };
 
     setTime = (timeValue) => {

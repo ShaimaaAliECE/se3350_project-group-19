@@ -155,8 +155,16 @@ class Level1 extends Component {
     this.setState({
       maxCount: newcount
     });
-    //console.log(stepCounter);
     console.log(this.state.maxCount);
+
+    // Check for level completion
+    let array = [...arrayGlobal];
+    const arrayc = [...array];
+    let steps = generateMergeSteps(arrayc);
+    if (this.state.maxCount >= steps.length)
+    {
+      this.handleLevelComplete();
+    }
   }
 
   reset() {
@@ -177,14 +185,6 @@ class Level1 extends Component {
     let array = [...arrayGlobal];
     const arrayc = [...array];
     let steps = generateMergeSteps(arrayc);
-    //console.log(steps);
-
-    // Check for level completion
-    if (this.state.maxCount >= steps.length)
-    {
-      this.handleLevelComplete();
-    }
-
 
     return (
       <>
