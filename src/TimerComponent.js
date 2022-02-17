@@ -9,9 +9,7 @@ class TimerComponent extends Component {
             timerOn: true,
             time: 0
         }
-        this.timer = 0;
         this.countUp = this.countUp.bind(this);
-        this.startTimer = this.startTimer.bind(this);
     }
 
     setTimerOn = (on) => {
@@ -28,23 +26,14 @@ class TimerComponent extends Component {
     };
 
     componentDidMount() {
-        this.startTimer();
+        setInterval(this.countUp, 1000);
     };
 
     resetTimer() {
-        console.log('reset timer');
         this.setState({
             time: 0,
             timerOn: true
         });
-        this.timer = 0;
-        this.startTimer();
-    };
-
-    startTimer() {
-        if (this.timer == 0) {
-            this.timer = setInterval(this.countUp, 1000);
-        }
     };
 
     countUp() {
@@ -54,8 +43,6 @@ class TimerComponent extends Component {
             this.setState({
                 time: time,
             });
-        } else {
-            clearInterval(this.timer);
         }
     };
 
