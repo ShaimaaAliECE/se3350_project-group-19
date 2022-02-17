@@ -35,7 +35,7 @@ class TimerComponent extends Component {
     countUp() {
         if(this.state.timerOn) {
             // Add one second, set state so a re-render happens.
-            let time = this.state.time + 1;
+            let time = this.state.time + 1000;
             this.setState({
                 time: time,
             });
@@ -49,21 +49,7 @@ class TimerComponent extends Component {
             <div className="Timers">
                 <div id="display">
                     <span>{("0" + Math.floor((this.state.time / 60000) % 60)).slice(-2)}:</span>
-                    <span>{("0" + Math.floor((this.state.time / 1000) % 60)).slice(-2)}:</span>
-                    <span>{("0" + ((this.state.time / 10) % 100)).slice(-2)}</span>
-                </div>
-
-                <div id="buttons">
-                    {!this.state.timerOn && this.state.time === 0 && (
-                        <button onClick={() => this.setTimerOn(true)}>Start</button>
-                    )}
-                    {this.state.timerOn && <button onClick={() => this.setTimerOn(false)}>Stop</button>}
-                    {!this.state.timerOn && this.state.time > 0 && (
-                        <button onClick={() => this.setTime(0)}>Reset</button>
-                    )}
-                    {!this.state.timerOn && this.state.time > 0 && (
-                        <button onClick={() => this.setTimerOn(true)}>Resume</button>
-                    )}
+                    <span>{("0" + Math.floor((this.state.time / 1000) % 60)).slice(-2)}</span>
                 </div>
             </div>
         );

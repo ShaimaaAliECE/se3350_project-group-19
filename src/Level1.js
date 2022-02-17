@@ -4,8 +4,6 @@ import generateRandomArray from "./rand_array";
 import Instructions from "./Instructions";
 import ListSplit from "./ListSplit";
 import ListMerge from "./ListMerge";
-
-import Timer from "./timer";
 import TimerComponent from "./TimerComponent";
 
 //Global variable to control flow
@@ -194,8 +192,6 @@ class Level1 extends Component {
           <h1 h1 style={{ backgroundColor: "lightblue", padding: "10px" }}>Sortin'</h1>
           <h1>Sortin' Level 1</h1>
           
-          <br></br>
-          <Timer/>
           <br></br>
           <TimerComponent ref={this.timerElement}/>
           <br></br>
