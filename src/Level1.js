@@ -6,6 +6,7 @@ import ListSplit from "./ListSplit";
 import ListMerge from "./ListMerge";
 
 import Timer from "./timer";
+import TimerComponent from "./TimerComponent";
 
 //Global variable to control flow
 var stepCounter = 0;
@@ -147,7 +148,7 @@ class Level1 extends Component {
       proceed: true,
       maxCount: 2,
     };
-
+    this.timerElement = React.createRef();
   }
 
   handleClick (){
@@ -168,6 +169,11 @@ class Level1 extends Component {
     console.log('reset');
   }
 
+  handleLevelComplete = () => {
+    console.log('Level Complete');
+    this.timerElement.current.setTimerOn(false);
+  };
+
   render() {
     let array = [...arrayGlobal];
     const arrayc = [...array];
@@ -175,11 +181,10 @@ class Level1 extends Component {
     //console.log(steps);
 
     // Check for level completion
-    if (this.state.maxCount >= steps.length)
+    // if (this.state.maxCount >= steps.length)
+    if (this.state.maxCount > 5)
     {
-      console.log('Level Complete');
-      isRunning = false; // Stop Timer
-      console.log("Timer: " + isRunning);
+      this.handleLevelComplete();
     }
 
 
@@ -190,7 +195,9 @@ class Level1 extends Component {
           <h1>Sortin' Level 1</h1>
           
           <br></br>
-          <Timer></Timer>
+          <Timer/>
+          <br></br>
+          <TimerComponent ref={this.timerElement}/>
           <br></br>
 
           <button onClick={() => this.handleClick()}>
