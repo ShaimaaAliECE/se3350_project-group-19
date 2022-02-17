@@ -189,7 +189,7 @@ class Level1 extends Component {
     return (
       <>
         <header>
-          <h1 h1 style={{ backgroundColor: "lightblue", padding: "10px" }}>Sortin'</h1>
+          <h1 style={{ backgroundColor: "lightblue", padding: "10px" }}>Sortin'</h1>
           <h1>Sortin' Level 1</h1>
           
           <br></br>
