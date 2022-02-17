@@ -6,7 +6,6 @@ function Timer() {
     const [timerOn, setTimerOn] = React.useState(true); // Timer starts as soon as level is loaded
 
     React.useEffect(() => {
-        console.log('Use effect');
         let interval = null;
 
         if (timerOn) {
