@@ -165,6 +165,7 @@ class Level1 extends Component {
       maxCount: 2
     });
     console.log('reset');
+    this.timerElement.current.resetTimer();
   }
 
   handleLevelComplete = () => {
@@ -179,8 +180,7 @@ class Level1 extends Component {
     //console.log(steps);
 
     // Check for level completion
-    // if (this.state.maxCount >= steps.length)
-    if (this.state.maxCount > 5)
+    if (this.state.maxCount >= steps.length)
     {
       this.handleLevelComplete();
     }
