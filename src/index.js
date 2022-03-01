@@ -10,7 +10,7 @@ import { Formik, Field, Form } from 'formik';
 
 ReactDOM.render(
 <React.StrictMode>
-<BrowserRouter>
+<BrowserRouter basename='/React'>
 <App/>
 </BrowserRouter>
 </React.StrictMode>
