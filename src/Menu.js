@@ -60,6 +60,8 @@ function Menu() {
                 <option value="one">Level 1</option>
                 <option value="two">Level 2</option>
                 <option value="three">Level 3</option>
+                <option value="four">Level 4</option>
+                <option value="five">Level 5</option>
                 {/* <option value="three">Level 3</option> */}
                 </Field>
               </label>
@@ -70,7 +72,7 @@ function Menu() {
             <div id="algorithmSelect">Choose a Sorting Algorithm: </div>
             <div role="group">
               <label>
-                <Field as="select" name="algorithm" size="3">
+                <Field as="select" name="algorithm" size="5">
                   <option value="mergeSort">Merge Sort</option>
                 </Field>
               </label>
