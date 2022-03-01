@@ -26,7 +26,7 @@ import { Formik, Field, Form } from 'formik';
 // }
 
 function GoBackList (){
-console.log(window.location.href)
+console.log(window.location.protocol + window.location.host + "/leveltwo")
   return(
     <div>
       <Formik
@@ -40,7 +40,7 @@ console.log(window.location.href)
   
           // window.location.href = "http://google.com"
           // window.location.replace("http://localhost:5500/src/level" + values.level + ".html");
-           window.location.href = "http://localhost:3000/level" + values.level 
+           window.location.href = window.location.protocol + "//"+ window.location.host + "/level" + values.level 
           // return false;
         }}
       >
@@ -76,14 +76,13 @@ console.log(window.location.href)
             <div role="group">
               <label>
                 <Field as="select" name="level" size="3">
-                {window.location.href ==  'http://localhost:3000/leveltwo' &&
+                {window.location.href ==  window.location.protocol + "//"+ window.location.host + "/leveltwo" &&
                     <option value="one">Level 1</option>
                  }
-
-                {window.location.href ==  'http://localhost:3000/levelthree' &&
+                {window.location.href ==   window.location.protocol + "//"+ window.location.host + "/levelthree" &&
                     <option value="one">Level 1</option>
                  }
-                 {window.location.href ==  'http://localhost:3000/levelthree' &&
+                 {window.location.href ==   window.location.protocol  + "//"+ window.location.host + "/levelthree" &&
                     <option value="two">Level 2</option>
                  }
                 {/* <option value="three">Level 3</option> */}
