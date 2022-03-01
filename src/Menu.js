@@ -20,7 +20,7 @@ function Menu() {
 
           // window.location.href = "http://google.com"
           // window.location.replace("http://localhost:5500/src/level" + values.level + ".html");
-          window.location.href = "http://localhost:3000/level" + values.level
+          window.location.href = window.location.href + "level" + values.level
           // return false;
         }}
       >
