@@ -92,12 +92,7 @@ class MergeSort extends Component {
 
 
   increaseStepCounter() {
-    if (stepCounterCalled == false) {
-      stepCounter++;
-      stepCounterCalled = true;
-    }
-    else
-      stepCounterCalled = false;
+    stepCounter++;
   }
 
   nextStep() {
