@@ -64,14 +64,14 @@ class MergeSort extends Component {
 
         {chunk.length != 1 && (
 
-          <>
+          <div>
             <MergeSort {...this.props} right={mid} currCount={0} levelOfRecursion={this.props.levelOfRecursion + 1} />
             <MergeSort {...this.props} left={mid} currCount={0} levelOfRecursion={this.props.levelOfRecursion + 1} />
             <div className="join">
               <Join {...this.props} mid={mid} currCount={0} levelOfRecursion={this.props.levelOfRecursion - 1} />
             </div>
 
-          </>
+          </div>
         )}
       </div>
     );
@@ -162,7 +162,7 @@ class Level1 extends Component {
     let steps = generateMergeSteps(arrayc);
 
     return (
-      <>
+      <div>
         <header>
           <h1 style={{ backgroundColor: "lightblue", padding: "10px" }}>Sortin'</h1>
           <h1>Level 1</h1>
@@ -188,7 +188,7 @@ class Level1 extends Component {
         <section>
           <MergeSort array={array} left={0} right={array.length} maxCount={this.state.maxCount} steps={steps} levelOfRecursion={0} />
         </section>
-      </>
+      </div>
     );
   }
 }
