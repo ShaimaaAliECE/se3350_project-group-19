@@ -9,19 +9,11 @@ import TimerComponent from "./TimerComponent";
 //Global variable to control flow
 var stepCounter = 0;
 var loopCounterIdx = 0;
-var stepCounterCalled = false;
-var stepCounterCalledLoop = false;
 var arrayGlobal = generateRandomArray(10, 20);
 class Join extends Component {
 
   increaseStepCounterLoop(length, i) {
-    if (i == length) {
-      stepCounterCalledLoop = !stepCounterCalledLoop;
-      return;
-    }
-    if (stepCounterCalledLoop == false) {
-      stepCounter++;
-    }
+    stepCounter++;
 
   }
   render() {
