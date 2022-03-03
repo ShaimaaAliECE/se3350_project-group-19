@@ -45,7 +45,7 @@ class Join extends Component {
 
     return (
       <div>
-        { diff > 0 && (<ListMerge values={onebyone} maxCount={maxCount} levelOfRecursion={this.props.levelOfRecursion} steps={this.props.steps} />)}
+        {diff > 0 && (<ListMerge values={onebyone} maxCount={maxCount} levelOfRecursion={this.props.levelOfRecursion} steps={this.props.steps} />)}
       </div>
     );
   }
