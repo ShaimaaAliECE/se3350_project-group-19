@@ -39,13 +39,13 @@ class Join extends Component {
     for (let i = 0; i <= sorted.length; i++) {
       stepCounter++;
     }
+    stepCounter--;
     let diff = maxCount - loopCounterIdx;
     let onebyone = sorted.slice(0, diff);
 
-
     return (
       <div>
-        {diff > 0 && (<ListMerge values={onebyone} maxCount={maxCount} levelOfRecursion={this.props.levelOfRecursion} steps={this.props.steps} />)}
+        { diff > 0 && (<ListMerge values={onebyone} maxCount={maxCount} levelOfRecursion={this.props.levelOfRecursion} steps={this.props.steps} />)}
       </div>
     );
   }
@@ -77,15 +77,10 @@ class MergeSort extends Component {
     );
   }
 
-
-  increaseStepCounter() {
-    stepCounter++;
-  }
-
   nextStep() {
     const { array, left, right, maxCount } = this.props;
     const chunk = array.slice(left, right);
-    this.increaseStepCounter();
+    stepCounter++;
     if (chunk.length > 1) {
       return (
         <div className="input">
