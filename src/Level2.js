@@ -6,6 +6,8 @@ import ListSplit from "./ListSplit";
 import ListMerge from "./ListMerge";
 import GoBackList from "./GoBackList"
 import TimerComponent from "./TimerComponent";
+import compareTwoNums from "./compareTwoNums";
+import DisplayTwoNums from "./displayTwoNums";
 import IdleTimerContainer from './IdleTimerContainer';
 
 //Global variable to control flow
@@ -165,6 +167,8 @@ class Level2 extends Component {
     let array = [...arrayGlobal];
     const arrayc = [...array];
     let steps = generateMergeSteps(arrayc);
+    const arraycomp = [...array];
+    let comp = compareTwoNums(arraycomp);
     console.log(steps);
 
 
@@ -187,6 +191,7 @@ class Level2 extends Component {
           <button onClick={() => this.reset()}>Reset Level</button>
 
           <Instructions instruct={steps[Math.min(steps.length - 1, this.state.maxCount - 2)].instruction} />
+          <DisplayTwoNums compare = {comp[Math.min(comp.length - 1, this.state.maxCount - 2)].instruction}/>
         </header>
 
         <section>

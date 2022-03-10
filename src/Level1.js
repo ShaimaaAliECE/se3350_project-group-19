@@ -5,6 +5,8 @@ import Instructions from "./Instructions";
 import ListSplit from "./ListSplit";
 import ListMerge from "./ListMerge";
 import TimerComponent from "./TimerComponent";
+import compareTwoNums from "./compareTwoNums";
+import DisplayTwoNums from "./displayTwoNums";
 import IdleTimerContainer from './IdleTimerContainer';
 
 //Global variable to control flow
@@ -161,8 +163,9 @@ class Level1 extends Component {
   render() {
     let array = [...arrayGlobal];
     const arrayc = [...array];
+    const arraycomp = [...array];
     let steps = generateMergeSteps(arrayc);
-
+    let comp = compareTwoNums(arraycomp);
     return (
       <div>
         <IdleTimerContainer></IdleTimerContainer>
@@ -184,10 +187,10 @@ class Level1 extends Component {
             <input type="submit" value="Quit" />
           </form>
 
-          <Instructions instruct={steps[Math.min(steps.length - 1, this.state.maxCount - 2)].instruction} />
+          <Instructions instruct = {steps[Math.min(steps.length - 1, this.state.maxCount - 2)].instruction}/>
+          <DisplayTwoNums compare = {comp[Math.min(comp.length - 1, this.state.maxCount - 2)].instruction}/>
 
         </header>
-
         <section>
           <MergeSort array={array} left={0} right={array.length} maxCount={this.state.maxCount} steps={steps} levelOfRecursion={0} />
         </section>
