@@ -27,6 +27,7 @@ class ListMerge extends Component {
       }
 
       const incorrect = () => {
+        this.props.parentCallback(true);
         new Audio(incorAud).play();
         this.setState({
           bgColor: 'red'
