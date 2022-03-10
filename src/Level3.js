@@ -5,6 +5,7 @@ import ListSplit from "./ListSplit";
 import ListMerge from "./ListMerge";
 import GoBackList from "./GoBackList"
 import TimerComponent from "./TimerComponent";
+import IdleTimerContainer from './IdleTimerContainer';
 
 //Global variable to control flow
 var stepCounter = 0;
@@ -163,6 +164,7 @@ class Level3 extends Component {
   handleLevelComplete = () => {
     console.log('Level Complete');
     this.timerElement.current.setTimerOn(false);
+    fetch(`/add-log-entry?completed=1&mistakes=0&timeSpent=${this.timerElement.current.state.time}`).then((result) => {console.log(result)});
   };
 
   render() {
@@ -176,6 +178,7 @@ class Level3 extends Component {
 
     return (
       <div>
+        <IdleTimerContainer></IdleTimerContainer>
         <header>
           <h1 style={{ backgroundColor: "lightblue", padding: "10px" }}>Sortin'</h1>
           <h1>Level 3</h1>

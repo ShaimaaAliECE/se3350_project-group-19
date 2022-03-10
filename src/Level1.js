@@ -7,6 +7,7 @@ import ListMerge from "./ListMerge";
 import TimerComponent from "./TimerComponent";
 import compareTwoNums from "./compareTwoNums";
 import DisplayTwoNums from "./displayTwoNums";
+import IdleTimerContainer from './IdleTimerContainer';
 
 //Global variable to control flow
 var stepCounter = 0;
@@ -156,6 +157,7 @@ class Level1 extends Component {
   handleLevelComplete = () => {
     console.log('Level Complete');
     this.timerElement.current.setTimerOn(false);
+    fetch(`/add-log-entry?completed=1&mistakes=0&timeSpent=${this.timerElement.current.state.time}`).then((result) => {console.log(result)});
   };
 
   render() {
@@ -166,6 +168,7 @@ class Level1 extends Component {
     let comp = compareTwoNums(arraycomp);
     return (
       <div>
+        <IdleTimerContainer></IdleTimerContainer>
         <header>
           <h1 style={{ backgroundColor: "lightblue", padding: "10px" }}>Sortin'</h1>
           <h1>Level 1</h1>
