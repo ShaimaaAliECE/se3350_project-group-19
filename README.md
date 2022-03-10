@@ -12,3 +12,9 @@ where:
 * `db_host` is the IP address of the database server (should be `127.0.0.1`).
 * `db_name` is the name of the database. Will likely be `sortin-logging` but it hasn't yet been created in GCP yet.
 * `db_user` and `db_pass` are the login credentials for the database server.
+
+To run the server without connecting to a database, use this command instead:
+
+`node server.js -n` or `node server.js --no-db`
+
+This will disable database functionality on the server. It will still accept DB-related requests, but will respond with a `503 Service Unavailable` error.
