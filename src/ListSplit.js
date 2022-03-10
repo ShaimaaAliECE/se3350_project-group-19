@@ -40,7 +40,7 @@ class ListSplit extends Component {
       }
       else  {
         console.log("maxCount: "+this.props.maxCount);
-        console.log("worng split click");
+        console.log("wrong split click");
         incorrect();
       }
       

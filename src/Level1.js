@@ -5,25 +5,14 @@ import Instructions from "./Instructions";
 import ListSplit from "./ListSplit";
 import ListMerge from "./ListMerge";
 import TimerComponent from "./TimerComponent";
+import IdleTimerContainer from './IdleTimerContainer';
 
 //Global variable to control flow
 var stepCounter = 0;
 var loopCounterIdx = 0;
-var stepCounterCalled = false;
-var stepCounterCalledLoop = false;
 var arrayGlobal = generateRandomArray(10, 20);
 class Join extends Component {
 
-  increaseStepCounterLoop(length, i) {
-    if (i == length) {
-      stepCounterCalledLoop = !stepCounterCalledLoop;
-      return;
-    }
-    if (stepCounterCalledLoop == false) {
-      stepCounter++;
-    }
-
-  }
   render() {
     const { array, left, right, mid, maxCount } = this.props;
 
@@ -49,16 +38,15 @@ class Join extends Component {
 
     loopCounterIdx = stepCounter + 1;
     for (let i = 0; i <= sorted.length; i++) {
-      this.increaseStepCounterLoop(sorted.length, i);
-
+      stepCounter++;
     }
+    stepCounter--;
     let diff = maxCount - loopCounterIdx;
     let onebyone = sorted.slice(0, diff);
 
-
     return (
       <div>
-        {diff > 0 && (<ListMerge values={onebyone} incrementMaxCount={() => this.props.incrementMaxCount()} maxCount={maxCount} levelOfRecursion={this.props.levelOfRecursion} steps={this.props.steps} />)}
+        {diff > 0 && (<ListMerge values={onebyone} maxCount={maxCount} levelOfRecursion={this.props.levelOfRecursion} steps={this.props.steps} />)}
       </div>
     );
   }
@@ -77,38 +65,28 @@ class MergeSort extends Component {
 
         {chunk.length != 1 && (
 
-          <>
+          <div>
             <MergeSort {...this.props} right={mid} currCount={0} levelOfRecursion={this.props.levelOfRecursion + 1} />
             <MergeSort {...this.props} left={mid} currCount={0} levelOfRecursion={this.props.levelOfRecursion + 1} />
             <div className="join">
               <Join {...this.props} mid={mid} currCount={0} levelOfRecursion={this.props.levelOfRecursion - 1} />
             </div>
 
-          </>
+          </div>
         )}
       </div>
     );
   }
 
-
-  increaseStepCounter() {
-    if (stepCounterCalled == false) {
-      stepCounter++;
-      stepCounterCalled = true;
-    }
-    else
-      stepCounterCalled = false;
-  }
-
   nextStep() {
     const { array, left, right, maxCount } = this.props;
     const chunk = array.slice(left, right);
-    this.increaseStepCounter();
+    stepCounter++;
     if (chunk.length > 1) {
       return (
         <div className="input">
 
-          {stepCounter < maxCount && (<ListSplit values={chunk} incrementMaxCount={() => this.props.incrementMaxCount()} maxCount={maxCount} levelOfRecursion={this.props.levelOfRecursion} steps={this.props.steps} />)}
+          {stepCounter < maxCount && (<ListSplit values={chunk} maxCount={maxCount} levelOfRecursion={this.props.levelOfRecursion} steps={this.props.steps} />)}
         </div>
       );
     }
@@ -116,7 +94,7 @@ class MergeSort extends Component {
       return (
         <div className="input">
 
-          {stepCounter < maxCount && (<ListMerge values={chunk} incrementMaxCount={() => this.props.incrementMaxCount()} maxCount={maxCount} levelOfRecursion={this.props.levelOfRecursion - 1} steps={this.props.steps} />)}
+          {stepCounter < maxCount && (<ListMerge values={chunk} maxCount={maxCount} levelOfRecursion={this.props.levelOfRecursion - 1} steps={this.props.steps} />)}
         </div>
       );
 
@@ -185,7 +163,8 @@ class Level1 extends Component {
     let steps = generateMergeSteps(arrayc);
 
     return (
-      <>
+      <div>
+        <IdleTimerContainer></IdleTimerContainer>
         <header>
           <h1 style={{ backgroundColor: "lightblue", padding: "10px" }}>Sortin'</h1>
           <h1>Level 1</h1>
@@ -209,9 +188,9 @@ class Level1 extends Component {
         </header>
 
         <section>
-          <MergeSort array={array} left={0} right={array.length} maxCount={this.state.maxCount} incrementMaxCount={() => { }} steps={steps} levelOfRecursion={0} />
+          <MergeSort array={array} left={0} right={array.length} maxCount={this.state.maxCount} steps={steps} levelOfRecursion={0} />
         </section>
-      </>
+      </div>
     );
   }
 }
