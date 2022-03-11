@@ -9,6 +9,7 @@ import TimerComponent from "./TimerComponent";
 import compareTwoNums from "./compareTwoNums";
 import DisplayTwoNums from "./displayTwoNums";
 import IdleTimerContainer from './IdleTimerContainer';
+import ModalPopup from './modal_popup';
 
 //Global variable to control flow
 var stepCounter = 0;
@@ -131,7 +132,12 @@ class Level2 extends Component {
       maxCount: 2,
     };
     this.timerElement = React.createRef();
+    this.title = "Game Over";
   }
+
+  isShowPopup = (status) => {  
+    this.setState({ showModalPopup: status });
+  };
 
   handleClick() {
     stepCounter = 0;
@@ -161,6 +167,8 @@ class Level2 extends Component {
     console.log('Level Complete');
     this.timerElement.current.setTimerOn(false);
     fetch(`/add-log-entry?completed=1&mistakes=0&timeSpent=${this.timerElement.current.state.time}`).then((result) => {console.log(result)});
+    this.setState({ showModalPopup: true });
+    this.title = "Level Completed!"
   };
 
   render() {
@@ -184,11 +192,9 @@ class Level2 extends Component {
           <TimerComponent ref={this.timerElement} />
           <br></br>
 
-          <GoBackList />
           <form action="/">
             <input type="submit" value="Quit" />
           </form>
-          <button onClick={() => this.reset()}>Reset Level</button>
 
           <Instructions instruct={steps[Math.min(steps.length - 1, this.state.maxCount - 2)].instruction} />
           <DisplayTwoNums compare = {comp[Math.min(comp.length - 1, this.state.maxCount - 2)].instruction}/>
@@ -199,6 +205,13 @@ class Level2 extends Component {
 
           <MergeSort array={array} left={0} right={array.length} maxCount={this.state.maxCount} incrementMaxCount={() => this.handleClick()} steps={steps} levelOfRecursion={0} />
         </section>
+
+        <ModalPopup  
+            showModalPopup={this.state.showModalPopup}  
+            onPopupClose={this.isShowPopup} 
+            title={this.title}
+          ></ModalPopup>
+
       </div>
     );
   }

@@ -6,6 +6,7 @@ import ListMerge from "./ListMerge";
 import GoBackList from "./GoBackList"
 import TimerComponent from "./TimerComponent";
 import IdleTimerContainer from './IdleTimerContainer';
+import ModalPopup from './modal_popup';
 
 //Global variable to control flow
 var stepCounter = 0;
@@ -132,7 +133,12 @@ class Level3 extends Component {
       complete: false
     };
     this.timerElement = React.createRef();
+    this.title = "Game Over";
   }
+
+  isShowPopup = (status) => {  
+    this.setState({ showModalPopup: status });
+  };
 
   handleClick() {
     stepCounter = 0;
@@ -165,6 +171,8 @@ class Level3 extends Component {
     console.log('Level Complete');
     this.timerElement.current.setTimerOn(false);
     fetch(`/add-log-entry?completed=1&mistakes=0&timeSpent=${this.timerElement.current.state.time}`).then((result) => {console.log(result)});
+    this.setState({ showModalPopup: true });
+    this.title = "Level Completed!"  
   };
 
   render() {
@@ -187,11 +195,9 @@ class Level3 extends Component {
           <TimerComponent ref={this.timerElement} />
           <br></br>
 
-          <GoBackList />
           <form action="/">
             <input type="submit" value="Quit" />
           </form>
-          <button onClick={() => this.reset()}>Reset Level</button>
           {this.state.complete && <h2>The array is sorted. Level complete!</h2>}
         </header>
 
@@ -200,6 +206,13 @@ class Level3 extends Component {
 
           <MergeSort array={array} left={0} right={array.length} maxCount={this.state.maxCount} incrementMaxCount={() => this.handleClick()} steps={steps} levelOfRecursion={0} />
         </section>
+
+        <ModalPopup  
+            showModalPopup={this.state.showModalPopup}  
+            onPopupClose={this.isShowPopup} 
+            title={this.title}
+          ></ModalPopup>
+
       </div>
     );
   }

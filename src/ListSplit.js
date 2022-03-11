@@ -23,9 +23,11 @@ class ListSplit extends Component {
 
       const incorrect = () => {
         new Audio(incorAud).play();
+        
         this.setState({
           bgColor: 'red'
         })
+        this.props.parentCallback(true);//for heart
       }
 
 

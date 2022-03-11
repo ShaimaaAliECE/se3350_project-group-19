@@ -31,6 +31,7 @@ class ListMerge extends Component {
         this.setState({
           bgColor: 'red'
         })
+        this.props.parentCallback(true);//for hearts
       }
   
       if(this.props.steps[this.props.maxCount-2].stepType == "merge" && value == this.props.steps[this.props.maxCount-2].clickValue && this.props.levelOfRecursion == this.props.steps[this.props.maxCount-2].levelOfRecursion){
