@@ -85,6 +85,27 @@ console.log(window.location.protocol + window.location.host + "/leveltwo")
                  {window.location.href ==   window.location.protocol  + "//"+ window.location.host + "/levelthree" &&
                     <option value="two">Level 2</option>
                  }
+                   {window.location.href ==   window.location.protocol + "//"+ window.location.host + "/levelfour" &&
+                    <option value="one">Level 1</option>
+                 }
+                 {window.location.href ==   window.location.protocol  + "//"+ window.location.host + "/levelfour" &&
+                    <option value="two">Level 2</option>
+                 }
+                   {window.location.href ==   window.location.protocol + "//"+ window.location.host + "/levelfour" &&
+                    <option value="three">Level 3</option>
+                 }
+                   {window.location.href ==   window.location.protocol + "//"+ window.location.host + "/levelfive" &&
+                    <option value="one">Level 1</option>
+                 }
+                 {window.location.href ==   window.location.protocol  + "//"+ window.location.host + "/levelfive" &&
+                    <option value="two">Level 2</option>
+                 }
+                   {window.location.href ==   window.location.protocol + "//"+ window.location.host + "/levelfive" &&
+                    <option value="three">Level 3</option>
+                 }
+                 {window.location.href ==   window.location.protocol  + "//"+ window.location.host + "/levelfive" &&
+                    <option value="four">Level 4</option>
+                 }
                 {/* <option value="three">Level 3</option> */}
                 </Field>
               </label>
