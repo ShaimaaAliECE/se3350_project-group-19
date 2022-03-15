@@ -9,9 +9,9 @@ The server file is `/server/server.js` and should be run with the following comm
 `node server.js db_host db_name db_user db_password`
 
 where:
-* `db_host` is the IP address of the database server (should be `127.0.0.1`).
+* `db_host` is the IP address of the database server.
 * `db_name` is the name of the database. Will likely be `sortin-logging` but it hasn't yet been created in GCP yet.
-* `db_user` and `db_pass` are the login credentials for the database server.
+* `db_user` and `db_password` are the login credentials for the database server.
 
 To run the server without connecting to a database, use this command instead:
 
