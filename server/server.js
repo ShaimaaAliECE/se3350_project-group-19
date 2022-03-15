@@ -1,13 +1,20 @@
 const express = require('express');
 const mysql = require('mysql');
 const path = require('path');
+const cookieParser = require('cookie-parser');
 
 // Create Express server
 const server = express();
 server.use(express.static(path.join(__dirname, 'build')));
+server.use(cookieParser('sortin'));
+server.use(express.urlencoded({extended: true}));
 
 // Set server port number
 const PORT = 4000;
+
+// Admin login credentials (who needs security lol)
+const ADMIN_USERNAME = 'sortin';
+const ADMIN_PASSWORD = 'admin';
 
 // Command line argument to disable database functionality (for testing)
 let useDatabase = true;
@@ -81,6 +88,39 @@ server.get('/add-log-entry', (req, res) => {
             error: 'Request is missing one or more required fields: level, algorithm, completed, mistakes, timeSpent'
         });
     }
+});
+
+// Route for accessing admin portal
+server.get('/admin', (req, res) => {
+    if (!req.cookies['admin']){
+        res.redirect('/login');
+    }
+    else{
+        res.sendFile('admin/admin.html', {root: __dirname});
+    }
+});
+
+// Route for admin login (GET request - from navigating to the login page)
+server.get('/login', (req, res) => {
+    res.sendFile('admin/login.html', {root: __dirname});
+});
+
+// Route for admin login (POST request - from submitting the form)
+server.post('/login', (req, res) => {
+    // Check the submitted credentials
+    if (req.body.username == ADMIN_USERNAME && req.body.password == ADMIN_PASSWORD){
+        // Set the admin cookie and proceed to the admin page
+        res.cookie('admin', 'admin').sendFile('admin/admin.html', {root: __dirname});
+    }
+    else{
+        // Return to the login page
+        res.sendFile('admin/login.html', {root: __dirname});
+    }
+});
+
+//Route for the admin CSS file
+server.get('/admin.css', (req, res) => {
+    res.sendFile('admin/admin.css', {root: __dirname});
 });
 
 // Router for react app (only works in build)
