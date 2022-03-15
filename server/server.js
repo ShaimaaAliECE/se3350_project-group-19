@@ -36,7 +36,7 @@ const DB_CONFIG = useDatabase ? {
 server.get('/add-log-entry', (req, res) => {
     // Check that request has all required fields
     console.log('Request received: ' + req.url);
-    if (req.query.completed && req.query.mistakes && req.query.timeSpent){
+    if (req.query.level && req.query.algorithm && req.query.completed && req.query.mistakes && req.query.timeSpent){
         // Only do anything database-related if it's enabled
         if (useDatabase){
             let currentDate = new Date();
@@ -49,7 +49,7 @@ server.get('/add-log-entry', (req, res) => {
             // Add new entry to DB
             // Connect to DB and send query
             let conn = mysql.createConnection(DB_CONFIG);
-            let query = `INSERT INTO LogEntries VALUES('${timestampString}', ${req.query.completed}, ${req.query.mistakes}, '${timeSpentString}')`;
+            let query = `INSERT INTO LogEntries VALUES('${timestampString}', ${req.query.level}, '${req.query.algorithm}', ${req.query.completed}, ${req.query.mistakes}, '${timeSpentString}')`;
             conn.query(query, (err, rows, fields) => {
                 if (err) {
                     console.log(err);
@@ -78,7 +78,7 @@ server.get('/add-log-entry', (req, res) => {
     else{
         res.status(400).json({
             success: false,
-            error: 'Request is missing one or more required fields: completed, mistakes, timeSpent'
+            error: 'Request is missing one or more required fields: level, algorithm, completed, mistakes, timeSpent'
         });
     }
 });

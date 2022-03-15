@@ -166,7 +166,7 @@ class Level2 extends Component {
   handleLevelComplete = () => {
     console.log('Level Complete');
     this.timerElement.current.setTimerOn(false);
-    fetch(`/add-log-entry?completed=1&mistakes=0&timeSpent=${this.timerElement.current.state.time}`).then((result) => {console.log(result)});
+    fetch(`/add-log-entry?level=2&algorithm=merge&completed=1&mistakes=0&timeSpent=${this.timerElement.current.state.time}`).then((result) => {console.log(result)});
     this.setState({ showModalPopup: true });
     this.title = "Level Completed!"
   };
