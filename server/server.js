@@ -38,6 +38,11 @@ const DB_CONFIG = useDatabase ? {
     password: process.argv[5]
 } : null;
 
+// ======================================================================== //
+//                                                                          //
+//                              DATABASE ROUTES                             //
+//                                                                          //
+// ======================================================================== //
 
 // Route for adding a DB entry
 server.get('/add-log-entry', (req, res) => {
@@ -65,14 +70,17 @@ server.get('/add-log-entry', (req, res) => {
                         success: false,
                         error: 'DB error: ' + err.message
                     });
+                    return;
                 }
                 else {
                     // Send a success response (this will only be called via AJAX so no need to send any HTML)
                     res.json({
                         success: true
                     });
+                    return;
                 }
             });
+            conn.end();
         }
         // If DB connection is disabled, send an error response
         else{
@@ -80,6 +88,7 @@ server.get('/add-log-entry', (req, res) => {
                 success: false,
                 error: 'Request was valid, but database functionality is disabled on this server.'
             });
+            return;
         }
     }
     else{
@@ -87,8 +96,49 @@ server.get('/add-log-entry', (req, res) => {
             success: false,
             error: 'Request is missing one or more required fields: level, algorithm, completed, mistakes, timeSpent'
         });
+        return;
     }
 });
+
+// Route for fetching all data
+server.get('/get-all-data', (req, res) => {
+    if (useDatabase){
+        let conn = mysql.createConnection(DB_CONFIG);
+        let query = 'SELECT * FROM LogEntries';
+        conn.query(query, (err, rows, fields) => {
+            if (err){
+                console.log(err);
+                res.status(500).json({
+                    success: false,
+                    error: 'Database error: ' + err.message
+                });
+                return;
+            }
+            else{
+                res.json({
+                    success: true,
+                    data: rows
+                });
+                return;
+            }
+        });
+        conn.end();
+    }
+    else{
+        res.status(503).json({
+            success: false,
+            error: 'Database functions are disabled on this server'
+        });
+        return;
+    }
+});
+
+
+// ======================================================================== //
+//                                                                          //
+//                              ADMIN ROUTES                                //
+//                                                                          //
+// ======================================================================== //
 
 // Route for accessing admin portal
 server.get('/admin', (req, res) => {
@@ -118,10 +168,27 @@ server.post('/login', (req, res) => {
     }
 });
 
+// Route to log out
+server.get('/log-out', (req, res) => {
+    // Clear admin cookie and return to login page
+    res.clearCookie('admin').redirect('/login');
+});
+
+// ======================================================================== //
+//                                                                          //
+//                              FILE ROUTES                                 //
+//                                                                          //
+// ======================================================================== //
+
 //Route for the admin CSS file
 server.get('/admin.css', (req, res) => {
     res.sendFile('admin/admin.css', {root: __dirname});
 });
+
+// Route for the admin script
+server.get('/admin.js', (req, res) => {
+    res.sendFile('admin/admin.js', {root: __dirname});
+})
 
 // Router for react app (only works in build)
 if (process.env.NODE_ENV !== 'development'){
