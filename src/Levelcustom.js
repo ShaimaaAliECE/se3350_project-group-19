@@ -11,7 +11,7 @@ import ModalPopup from './modal_popup';
 //Global variable to control flow
 var stepCounter = 0;
 var loopCounterIdx = 0;
-var arrayGlobal = generateRandomArray(window.lengthGlobal, window.rangeGlobal);
+var arrayGlobal = generateRandomArray(5, 5);
 var totalSteps = 0;
 
 class Join extends Component {
