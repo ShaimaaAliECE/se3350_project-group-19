@@ -9,9 +9,9 @@ import { Formik, Field, Form } from 'formik';
 
 
 ReactDOM.render(
-<BrowserRouter>
-<App/>
-</BrowserRouter>
-, 
-document.getElementById('root')
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
+    ,
+    document.getElementById('root')
 );

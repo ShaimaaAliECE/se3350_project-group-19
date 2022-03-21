@@ -24,8 +24,8 @@ function App() {
       <Route path="/levelthree" element = {<Level3/>} />
       <Route path="/levelfour" element = {<Level4/>} />
       <Route path="/levelfive" element = {<Level5/>} />
-      <Route path="/levelcustom" exact element = {<Levelcustom/>} />
-      <Route path="/levelcustomparameters" exact element = {<Levelcustomparameters/>} />
+      <Route path="/levelcustom" element = {<Levelcustom/>} />
+      <Route path="/levelcustomparameters" element = {<Levelcustomparameters/>} />
     </Routes>
     </div>
   );

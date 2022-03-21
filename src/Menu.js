@@ -24,7 +24,7 @@ function Menu() {
           // return false;
         }}
       >
-        <body>
+        <div>
           <Form>
             {/* Radio Button Idea */}
             {/* <div id="my-radio-group">Choose a Level: </div>
@@ -83,7 +83,7 @@ function Menu() {
 
             <button type="submit">Submit</button>
           </Form>
-        </body>
+        </div>
       </Formik>
     </div>
   );

@@ -7,11 +7,12 @@ import GoBackList from "./GoBackList"
 import TimerComponent from "./TimerComponent";
 import IdleTimerContainer from './IdleTimerContainer';
 import ModalPopup from './modal_popup';
+import {lengthGlobal, rangeGlobal} from "./Levelcustomparameters";
 
 //Global variable to control flow
 var stepCounter = 0;
 var loopCounterIdx = 0;
-var arrayGlobal = generateRandomArray(5, 5);
+var arrayGlobal = generateRandomArray(lengthGlobal, rangeGlobal);
 var totalSteps = 0;
 
 class Join extends Component {

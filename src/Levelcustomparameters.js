@@ -68,10 +68,13 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { Formik, Field, Form } from 'formik';
 
+var lengthGlobal;
+var rangeGlobal;
+
 function LevelCustomParameters() {
     return (
         <div>
-            <h1 h1 style={{ backgroundColor: "lightblue", padding: "10px" }}>Sortin'</h1>
+            <h1 style={{ backgroundColor: "lightblue", padding: "10px" }}>Sortin'</h1>
             <h1>Custom Level</h1>
 
             <Formik
@@ -80,9 +83,9 @@ function LevelCustomParameters() {
                     arrayRange: 2
                 }}
                 onSubmit={async (values) => {
-                    window.lengthGlobal = values.arrayLength;
-                    window.rangeGlobal = values.arrayRange;
-                    console.log(window.lengthGlobal + " " + window.rangeGlobal);
+                    lengthGlobal = values.arrayLength;
+                    rangeGlobal = values.arrayRange;
+                    console.log(lengthGlobal + " " + rangeGlobal);
 
                     await new Promise((r) => setTimeout(r, 500));
                     window.location.href = window.location.protocol + "//" + window.location.host + "/levelcustom";
@@ -91,7 +94,7 @@ function LevelCustomParameters() {
                     // window.location.href = window.location.protocol + "//" + window.location.host + "/";
                 }}
             >
-                <body>
+                <div>
                     <Form>
                         <label>Array length: </label>
                         <Field as="input" name="arrayLength" type="number" min="2" max="50">
@@ -106,10 +109,12 @@ function LevelCustomParameters() {
                         <br />
                         <button type="submit">Submit</button>
                     </Form>
-                </body>
+                </div>
             </Formik>
         </div>
     );
 }
 
 export default LevelCustomParameters;
+
+export {lengthGlobal, rangeGlobal}; // List of exported variables
