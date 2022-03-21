@@ -13,7 +13,6 @@ import Levelcustomparameters from "./Levelcustomparameters";
 import Levelcustom from "./Levelcustom";
 
 
-//Global variable to control flow
 function App() {
   return (
     <div className = "App">
@@ -31,4 +30,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

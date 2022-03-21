@@ -7,12 +7,11 @@ import GoBackList from "./GoBackList"
 import TimerComponent from "./TimerComponent";
 import IdleTimerContainer from './IdleTimerContainer';
 import ModalPopup from './modal_popup';
-import {lengthGlobal, rangeGlobal} from "./Levelcustomparameters";
 
 //Global variable to control flow
 var stepCounter = 0;
 var loopCounterIdx = 0;
-var arrayGlobal = generateRandomArray(lengthGlobal, rangeGlobal);
+var arrayGlobal;
 var totalSteps = 0;
 
 class Join extends Component {
@@ -127,6 +126,11 @@ class LevelCustom extends Component {
 
     constructor(props) {
         super(props);
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const length = parseInt(urlParams.get('length'));
+        const range = parseInt(urlParams.get('range'));
+        arrayGlobal = generateRandomArray(length, range);
         this.state = {
             proceed: true,
             maxCount: 2,
