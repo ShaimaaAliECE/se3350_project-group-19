@@ -121,7 +121,7 @@ class MergeSort extends Component {
   render() {
 
     return (
-      <div className="merge-sort">
+      <div className="merge-sort123">
         {this.nextStep()}
         {this.recurse()}
       </div>
@@ -198,13 +198,17 @@ class Level3 extends Component {
     this.title = "Level Completed!"  
   };
 
+  componentDidMount(){
+    let mid = document.body.scrollWidth/2*0.63;
+    document.documentElement.scrollLeft = document.body.scrollLeft = mid;
+  }
+
   render() {
     let array = [...arrayGlobal];
     const arrayc = [...array];
     let steps = generateMergeSteps(arrayc);
     console.log(steps);
     totalSteps = steps.length;
-
 
 
     return (

@@ -9,13 +9,13 @@ import IdleTimerContainer from './IdleTimerContainer';
 import ModalPopup from './modal_popup';
 import HeartDisp from './HeartDisp';
 
+
 //Global variable to control flow
 var stepCounter = 0;
 var loopCounterIdx = 0;
 var arrayGlobal = generateRandomArray(50, 100);
 var totalSteps = 0;
-
-
+    
 class Join extends Component {
 
   reduceLives() {
@@ -120,6 +120,8 @@ class MergeSort extends Component {
 
   render() {
 
+
+
     return (
       <div className="merge-sort">
         {this.nextStep()}
@@ -128,8 +130,6 @@ class MergeSort extends Component {
     );
   }
 }
-
-
 
 
 class Level5 extends Component {
@@ -159,9 +159,11 @@ class Level5 extends Component {
     });
   }
 
+  
   isShowPopup = (status) => {  
     this.setState({ showModalPopup: status });
   };
+
 
   handleClick() {
     stepCounter = 0;
@@ -198,14 +200,17 @@ class Level5 extends Component {
     this.title = "Level Completed!"
   };
 
+  componentDidMount(){
+    let mid = document.body.scrollWidth/2*0.69;
+    document.documentElement.scrollLeft = document.body.scrollLeft = mid;
+  }
+
   render() {
     let array = [...arrayGlobal];
     const arrayc = [...array];
     let steps = generateMergeSteps(arrayc);
     console.log(steps);
     totalSteps = steps.length;
-
-
 
     return (
       <div>
