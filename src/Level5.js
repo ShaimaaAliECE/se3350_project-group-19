@@ -177,18 +177,17 @@ class Level5 extends Component {
     this.title = "Level Completed!"
   };
 
+  componentDidMount(){
+    let mid = document.body.scrollWidth/2*0.69;
+    document.documentElement.scrollLeft = document.body.scrollLeft = mid;
+  }
+
   render() {
     let array = [...arrayGlobal];
     const arrayc = [...array];
     let steps = generateMergeSteps(arrayc);
     console.log(steps);
     totalSteps = steps.length;
-
-
-    //Setting the starting position to middle 
-    let mid = document.body.scrollWidth/2*0.83;
-    document.documentElement.scrollLeft = document.body.scrollLeft = mid;
-
 
     return (
       <div>

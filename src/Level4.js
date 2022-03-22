@@ -175,6 +175,11 @@ class Level4 extends Component {
     this.title = "Level Completed!"
   };
 
+  componentDidMount(){
+    let mid = document.body.scrollWidth/2*0.64;
+    document.documentElement.scrollLeft = document.body.scrollLeft = mid;
+  }
+
   render() {
     let array = [...arrayGlobal];
     const arrayc = [...array];
@@ -182,9 +187,6 @@ class Level4 extends Component {
     console.log(steps);
     totalSteps = steps.length;
 
-    //Setting the starting position to middle 
-    let mid = document.body.scrollWidth/2*0.65;
-    document.documentElement.scrollLeft = document.body.scrollLeft = mid;
     return (
       <div>
         <IdleTimerContainer></IdleTimerContainer>
