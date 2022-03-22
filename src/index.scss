@@ -69,6 +69,34 @@ section {
     }
   }
 }
+.merge-sort123 {
+  display: inline-block;
+  width: 40%;
+  padding: $padding;
+  border-radius: $padding;
+
+  .input {
+    margin-bottom: $padding;
+
+    &:only-child {
+      margin: 0;
+    }
+  }
+
+  .merge-sort123 {
+    width: 50%;
+
+    & + .merge-sort123 {
+      // border-left: 0;
+      margin-bottom: $padding;
+    }
+  }
+
+  .join {
+    border-radius: $padding;
+    padding: $padding;
+  }
+}
 
 .merge-sort {
   display: inline-block;

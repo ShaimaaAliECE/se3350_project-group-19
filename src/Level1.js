@@ -107,7 +107,7 @@ class MergeSort extends Component {
   render() {
 
     return (
-      <div className="merge-sort">
+      <div className="merge-sort123">
         {this.nextStep()}
         {this.recurse()}
       </div>
