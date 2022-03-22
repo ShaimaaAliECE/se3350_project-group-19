@@ -64,9 +64,6 @@ class MergeSort extends Component {
         const chunk = array.slice(left, right);
         const mid = left + Math.floor(chunk.length / 2);
 
-
-
-
         return (
             <div>
 
@@ -178,6 +175,12 @@ class LevelCustom extends Component {
         this.setState({ showModalPopup: true });
         this.title = "Level Completed!"
     };
+
+    // Centering the scrolling position when visit
+    componentDidMount(){
+        let mid = document.body.scrollWidth/2*0.64;
+        document.documentElement.scrollLeft = document.body.scrollLeft = mid;
+      }
 
     render() {
         let array = [...arrayGlobal];

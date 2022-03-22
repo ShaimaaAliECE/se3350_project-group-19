@@ -6,6 +6,10 @@ import { Formik, Field, Form } from 'formik';
 
 function LevelCustomParameters() {
     
+    //centering the scrolling position when visit
+    let mid = document.body.scrollWidth/2*0.63;
+    document.documentElement.scrollLeft = document.body.scrollLeft = mid;
+
     return (
         <div>
             <h1 style={{ backgroundColor: "lightblue", padding: "10px" }}>Sortin'</h1>
