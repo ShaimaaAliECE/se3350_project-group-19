@@ -34,14 +34,12 @@ class HeartDisp extends Component {
   
     render() {  
         let {numHearts} = this.props; 
-        let {nums} = this.props;
 
         return(
             <div class="health">
             <img id= 'heart1' class="heart" src={this.heartDisp("heart1",numHearts)}></img>
             <img id= 'heart2' class="heart" src={this.heartDisp("heart2",numHearts)}></img>
             <img id= 'heart3' class="heart" src={this.heartDisp("heart3",numHearts)}></img>
-            {nums}<br/>{numHearts}
             </div>
             
           );
