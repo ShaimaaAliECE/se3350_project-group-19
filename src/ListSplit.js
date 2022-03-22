@@ -23,10 +23,17 @@ class ListSplit extends Component {
 
       const incorrect = () => {
         new Audio(incorAud).play();
+<<<<<<< Updated upstream
         this.props.parentCallback(true);
         this.setState({
           bgColor: 'red'
         })
+=======
+        this.setState({
+          bgColor: 'red'
+        })
+        this.reduceLives();//for hearts
+>>>>>>> Stashed changes
       }
 
 
@@ -46,7 +53,10 @@ class ListSplit extends Component {
       }
       
     }
-    
+
+    reduceLives() {
+      this.props.parentCallback(true);
+    }
   
     render() {
      

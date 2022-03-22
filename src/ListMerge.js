@@ -32,7 +32,12 @@ class ListMerge extends Component {
         this.setState({
           bgColor: 'red'
         })
+<<<<<<< Updated upstream
+=======
+        this.reduceLives();//for hearts
+>>>>>>> Stashed changes
       }
+
   
       if(this.props.steps[this.props.maxCount-2].stepType == "merge" && value == this.props.steps[this.props.maxCount-2].clickValue && this.props.levelOfRecursion == this.props.steps[this.props.maxCount-2].levelOfRecursion){
         console.log("correct merge click");
@@ -44,8 +49,10 @@ class ListMerge extends Component {
         incorrect();
       } 
         
-      
-  
+    }
+
+    reduceLives() {
+      this.props.parentCallback(true);
     }
   
     render() {

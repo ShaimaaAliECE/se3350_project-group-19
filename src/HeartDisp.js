@@ -9,9 +9,8 @@ import emptyHeart from './/emptyheart.png';
 class HeartDisp extends Component {  
     constructor(props) {
         super(props);  
-    }  
-    
-  
+        
+    }
     
     heartDisp = (heart,num) =>{
         if(num == 3 && heart == "heart1"){
@@ -31,17 +30,15 @@ class HeartDisp extends Component {
         }
         
     }
+    
   
     render() {  
-        let {numHearts} = this.props; 
-        let {nums} = this.props;
-
+        let {numHearts} = this.props;
         return(
-            <div class="health">
+            <div id= {this.props.refresh} class="health">
             <img id= 'heart1' class="heart" src={this.heartDisp("heart1",numHearts)}></img>
             <img id= 'heart2' class="heart" src={this.heartDisp("heart2",numHearts)}></img>
             <img id= 'heart3' class="heart" src={this.heartDisp("heart3",numHearts)}></img>
-            {nums}<br/>{numHearts}
             </div>
             
           );

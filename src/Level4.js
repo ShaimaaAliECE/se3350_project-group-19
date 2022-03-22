@@ -5,35 +5,19 @@ import ListSplit from "./ListSplit";
 import ListMerge from "./ListMerge";
 import GoBackList from "./GoBackList"
 import TimerComponent from "./TimerComponent";
-import './index.css';
+import IdleTimerContainer from './IdleTimerContainer';
 import ModalPopup from './modal_popup';
 import HeartDisp from './HeartDisp';
 
 //Global variable to control flow
 var stepCounter = 0;
 var loopCounterIdx = 0;
-var stepCounterCalled = false;
-var stepCounterCalledLoop = false;
-var arrayGlobal = generateRandomArray(10, 20);
+var arrayGlobal = generateRandomArray(20, 50);
 var totalSteps = 0;
 
 
 class Join extends Component {
 
-<<<<<<< Updated upstream
-  increaseStepCounterLoop(length, i) {
-    if (i == length) {
-      stepCounterCalledLoop = !stepCounterCalledLoop;
-      return;
-    }
-    if (stepCounterCalledLoop == false) {
-      stepCounter++;
-    }
-
-  }
-
-=======
->>>>>>> Stashed changes
   reduceLives() {
     this.props.parentCallbackFinal(true);
   }
@@ -63,9 +47,9 @@ class Join extends Component {
 
     loopCounterIdx = stepCounter + 1;
     for (let i = 0; i <= sorted.length; i++) {
-      this.increaseStepCounterLoop(sorted.length, i);
-
+      stepCounter++;
     }
+    stepCounter --;
     let diff = maxCount - loopCounterIdx;
     let onebyone = sorted.slice(0, diff);
 
@@ -94,14 +78,14 @@ class MergeSort extends Component {
 
         {chunk.length != 1 && (
 
-          <>
+          <div>
             <MergeSort {...this.props} right={mid} currCount={0} levelOfRecursion={this.props.levelOfRecursion + 1} />
             <MergeSort {...this.props} left={mid} currCount={0} levelOfRecursion={this.props.levelOfRecursion + 1} />
             <div className="join">
               <Join {...this.props} mid={mid} currCount={0} levelOfRecursion={this.props.levelOfRecursion - 1} />
             </div>
 
-          </>
+          </div>
         )}
       </div>
     );
@@ -111,22 +95,10 @@ class MergeSort extends Component {
     this.props.parentCallbackFinal(true);
   }
 
-<<<<<<< Updated upstream
-  increaseStepCounter() {
-    if (stepCounterCalled == false) {
-      stepCounter++;
-      stepCounterCalled = true;
-    }
-    else
-      stepCounterCalled = false;
-  }
-
-=======
->>>>>>> Stashed changes
   nextStep() {
     const { array, left, right, maxCount } = this.props;
     const chunk = array.slice(left, right);
-    this.increaseStepCounter();
+    stepCounter ++;
     if (chunk.length > 1) {
       return (
         <div className="input">
@@ -160,7 +132,7 @@ class MergeSort extends Component {
 
 
 
-class Level3 extends Component {
+class Level4 extends Component {
 
   constructor(props) {
     super(props);
@@ -177,11 +149,6 @@ class Level3 extends Component {
   reduceLives() {
     this.numHearts--; 
     if(this.numHearts==0){
-<<<<<<< Updated upstream
-      this.setState({ showModalPopup: true });
-    }
-    console.log(this.numHearts);
-=======
       this.title = "Game Over: No Lives Left";
       this.setState({ showModalPopup: true });
     }
@@ -191,7 +158,6 @@ class Level3 extends Component {
     this.setState({
       maxCount: newcount
     });
->>>>>>> Stashed changes
   }
 
   isShowPopup = (status) => {  
@@ -228,6 +194,7 @@ class Level3 extends Component {
   handleLevelComplete = () => {
     console.log('Level Complete');
     this.timerElement.current.setTimerOn(false);
+    fetch(`/add-log-entry?completed=1&mistakes=0&timeSpent=${this.timerElement.current.state.time}`).then((result) => {console.log(result)});
     this.setState({ showModalPopup: true });
     this.title = "Level Completed!"
   };
@@ -242,58 +209,42 @@ class Level3 extends Component {
 
 
     return (
-      <>
+      <div>
+        <IdleTimerContainer></IdleTimerContainer>
         <header>
           <h1 style={{ backgroundColor: "lightblue", padding: "10px" }}>Sortin'</h1>
-          <h1>Level 3</h1>
+          <h1>Level 4</h1>
 
           <HeartDisp
-<<<<<<< Updated upstream
             numHearts = {this.numHearts}>
           </HeartDisp>
 
-
-=======
-            numHearts = {this.numHearts} >
-          </HeartDisp>
-
->>>>>>> Stashed changes
           <br></br>
           <TimerComponent ref={this.timerElement} />
           <br></br>
 
-          <GoBackList />
+          
           <form action="/">
             <input type="submit" value="Quit" />
           </form>
-          <button onClick={() => this.reset()}>Reset Level</button>
           {this.state.complete && <h2>The array is sorted. Level complete!</h2>}
         </header>
 
         <section>
 
 
-<<<<<<< Updated upstream
-          <MergeSort array={array} left={0} right={array.length} maxCount={this.state.maxCount} parentCallbackFinal = {() => this.reduceLives()} incrementMaxCount={() => this.handleClick()} steps={steps} levelOfRecursion={0} />
-=======
           <MergeSort array={array} left={0} right={array.length} parentCallbackFinal = {() => this.reduceLives()} maxCount={this.state.maxCount} incrementMaxCount={() => this.handleClick()} steps={steps} levelOfRecursion={0} />
->>>>>>> Stashed changes
         </section>
 
-        <div  
-  
-            onClick={() => this.isShowPopup(true)}>  
-            <button>Modal Pop up</button>  
-          </div>  
-          
-          <ModalPopup  
+        <ModalPopup  
             showModalPopup={this.state.showModalPopup}  
             onPopupClose={this.isShowPopup} 
             title={this.title}
           ></ModalPopup>
-      </>
+
+      </div>
     );
   }
 }
 
-export default Level3;
+export default Level4;

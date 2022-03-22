@@ -20,6 +20,7 @@ var arrayGlobal = generateRandomArray(10, 20);
 
 class Join extends Component {
 
+<<<<<<< Updated upstream
   increaseStepCounterLoop(length, i) {
     if (i == length) {
       stepCounterCalledLoop = !stepCounterCalledLoop;
@@ -31,11 +32,16 @@ class Join extends Component {
 
   }
   
+=======
+>>>>>>> Stashed changes
   reduceLives() {
     this.props.parentCallbackFinal(true);
   }
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
   render() {
     const { array, left, right, mid, maxCount } = this.props;
 
@@ -45,7 +51,7 @@ class Join extends Component {
     // here we mutate the array prop, so each component has access to the partial sorts
     // it's just a component communication, in real mergesort procedure, we wouldn't need this
     let sorted = [];
-
+    
     while (leftSorted.length && rightSorted.length) {
       const [a] = leftSorted;
       const [b] = rightSorted;
@@ -118,6 +124,10 @@ class MergeSort extends Component {
       stepCounterCalled = false;
   }
 
+  reduceLives() {
+    this.props.parentCallbackFinal(true);
+  }
+
   nextStep() {
     const { array, left, right, maxCount } = this.props;
     const chunk = array.slice(left, right);
@@ -166,6 +176,7 @@ class Level2 extends Component {
     this.title = "Game Over";
     this.numHearts = 3;
   }
+<<<<<<< Updated upstream
   
   reduceLives() {
     this.numHearts--; 
@@ -173,6 +184,21 @@ class Level2 extends Component {
       this.setState({ showModalPopup: true });
     }
     console.log(this.numHearts);
+=======
+
+  reduceLives() {
+    this.numHearts--; 
+    if(this.numHearts==0){
+      this.title = "Game Over: No Lives Left";
+      this.setState({ showModalPopup: true });
+    }
+    console.log(this.numHearts);
+    stepCounter = 0;
+    let newcount = this.state.maxCount;
+    this.setState({
+      maxCount: newcount
+    });
+>>>>>>> Stashed changes
   }
 
   isShowPopup = (status) => {  
@@ -227,6 +253,10 @@ class Level2 extends Component {
             numHearts = {this.numHearts}>
           </HeartDisp>
 
+          <HeartDisp
+            numHearts = {this.numHearts}>
+          </HeartDisp>
+
           <br></br>
           <TimerComponent ref={this.timerElement} />
           <br></br>
@@ -241,7 +271,13 @@ class Level2 extends Component {
         </header>
 
         <section>
+<<<<<<< Updated upstream
           <MergeSort array={array} left={0} right={array.length} maxCount={this.state.maxCount} parentCallbackFinal = {() => this.reduceLives()} incrementMaxCount={() => this.handleClick()} steps={steps} levelOfRecursion={0} />
+=======
+
+
+          <MergeSort array={array} left={0} right={array.length} parentCallbackFinal = {() => this.reduceLives()} maxCount={this.state.maxCount} incrementMaxCount={() => this.handleClick()} steps={steps} levelOfRecursion={0} />
+>>>>>>> Stashed changes
         </section>
 
       
