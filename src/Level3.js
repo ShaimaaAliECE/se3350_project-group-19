@@ -182,6 +182,9 @@ class Level3 extends Component {
     console.log(steps);
     totalSteps = steps.length;
 
+    //Setting the starting position to middle 
+    let mid = document.body.scrollWidth/2*0.65;
+    document.documentElement.scrollLeft = document.body.scrollLeft = mid;
 
 
     return (

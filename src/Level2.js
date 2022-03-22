@@ -179,7 +179,9 @@ class Level2 extends Component {
     let comp = compareTwoNums(arraycomp);
     console.log(steps);
 
-
+    //Setting the starting position to middle 
+    let mid = document.body.scrollWidth/2*0.65;
+    document.documentElement.scrollLeft = document.body.scrollLeft = mid;
 
     return (
       <div>
