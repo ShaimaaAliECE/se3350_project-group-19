@@ -198,6 +198,7 @@ class Level3 extends Component {
     this.title = "Level Completed!"  
   };
 
+  // Centering the scrolling position when visit
   componentDidMount(){
     let mid = document.body.scrollWidth/2*0.63;
     document.documentElement.scrollLeft = document.body.scrollLeft = mid;

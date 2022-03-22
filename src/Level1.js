@@ -173,6 +173,7 @@ class Level1 extends Component {
     document.documentElement.scrollLeft = document.body.scrollLeft = mid;
   }
 
+  // Centering the scrolling position when visit
   render() {
     let array = [...arrayGlobal];
     const arrayc = [...array];
