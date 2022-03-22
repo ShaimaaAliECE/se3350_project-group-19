@@ -5,7 +5,10 @@ import reportWebVitals from './reportWebVitals';
 import { Formik, Field, Form } from 'formik';
 
 function Menu() {
+  let mid = document.body.scrollWidth/2*0.63;
+  document.documentElement.scrollLeft = document.body.scrollLeft = mid;
   return (
+    
     <div>
       <h1 style={{ backgroundColor: "lightblue", padding: "10px" }}>Sortin'</h1>
 

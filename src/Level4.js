@@ -3,7 +3,7 @@ import generateMergeSteps from "./sort";
 import generateRandomArray from "./rand_array";
 import ListSplit from "./ListSplit";
 import ListMerge from "./ListMerge";
-import GoBackList from "./GoBackList"
+import GoBackList from "./GoBackList";
 import TimerComponent from "./TimerComponent";
 import IdleTimerContainer from './IdleTimerContainer';
 import ModalPopup from './modal_popup';
@@ -175,14 +175,17 @@ class Level4 extends Component {
     this.title = "Level Completed!"
   };
 
+  componentDidMount(){
+    let mid = document.body.scrollWidth/2*0.64;
+    document.documentElement.scrollLeft = document.body.scrollLeft = mid;
+  }
+
   render() {
     let array = [...arrayGlobal];
     const arrayc = [...array];
     let steps = generateMergeSteps(arrayc);
     console.log(steps);
     totalSteps = steps.length;
-
-
 
     return (
       <div>
