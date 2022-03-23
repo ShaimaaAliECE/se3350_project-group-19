@@ -151,6 +151,7 @@ class Level3 extends Component {
     if(this.numHearts==0){
       this.title = "Game Over: No Lives Left";
       this.setState({ showModalPopup: true });
+      fetch(`/add-log-entry?level=3&algorithm=merge&completed=0&mistakes=3&timeSpent=${this.timerElement.current.state.time}`).then((result) => {console.log(result)});
     }
     stepCounter = 0;
     let newcount = this.state.maxCount;
@@ -193,7 +194,7 @@ class Level3 extends Component {
   handleLevelComplete = () => {
     console.log('Level Complete');
     this.timerElement.current.setTimerOn(false);
-    fetch(`/add-log-entry?level=3&algorithm=merge&completed=1&mistakes=0&timeSpent=${this.timerElement.current.state.time}`).then((result) => {console.log(result)});
+    fetch(`/add-log-entry?level=3&algorithm=merge&completed=1&mistakes=${3 - this.numHearts}&timeSpent=${this.timerElement.current.state.time}`).then((result) => {console.log(result)});
     this.setState({ showModalPopup: true });
     this.title = "Level Completed!"  
   };
