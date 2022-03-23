@@ -46,11 +46,40 @@ import './index.scss';
                             <button onClick={() => this.reset()}>Reset Level</button>
                             </div>
                             <hr/>
-                            <h3>Go Back to Previous Level</h3>
-                           
-                            <GoBackList />
-                            <br/>
-                            <hr/>
+                            {window.location.href ==   window.location.protocol  + "//"+ window.location.host + "/leveltwo" &&
+                                <div> 
+                                <h3>Go Back to Previous Level</h3>
+                                <GoBackList />
+                                <br/>
+                                <hr/>
+                                </div>   
+                            }
+                            {window.location.href ==   window.location.protocol  + "//"+ window.location.host + "/levelthree" &&
+                                <div> 
+                                <h3>Go Back to Previous Level</h3>
+                                <GoBackList />
+                                <br/>
+                                <hr/>
+                                </div>   
+                            }
+                            {window.location.href ==   window.location.protocol  + "//"+ window.location.host + "/levelfour" &&
+                                <div> 
+                                <h3>Go Back to Previous Level</h3>
+                                <GoBackList />
+                                <br/>
+                                <hr/>
+                                </div>   
+                            }
+                            {window.location.href ==   window.location.protocol  + "//"+ window.location.host + "/levelfive" &&
+                                <div> 
+                                <h3>Go Back to Previous Level</h3>
+                                <GoBackList />
+                                <br/>
+                                <hr/>
+                                </div>   
+                            }
+                            
+                            
                             <div>
                             <h3>Submit Score:</h3> 
                                 <form>

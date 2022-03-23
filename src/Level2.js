@@ -10,6 +10,7 @@ import compareTwoNums from "./compareTwoNums";
 import DisplayTwoNums from "./displayTwoNums";
 import IdleTimerContainer from './IdleTimerContainer';
 import ModalPopup from './modal_popup';
+import HeartDisp from './HeartDisp';
 
 //Global variable to control flow
 var stepCounter = 0;
@@ -17,6 +18,10 @@ var loopCounterIdx = 0;
 var arrayGlobal = generateRandomArray(10, 20);
 
 class Join extends Component {
+
+  reduceLives() {
+    this.props.parentCallbackFinal(true);
+  }
 
   render() {
     const { array, left, right, mid, maxCount } = this.props;
@@ -51,7 +56,7 @@ class Join extends Component {
 
     return (
       <div>
-        {diff > 0 && (<ListMerge values={onebyone} incrementMaxCount={() => this.props.incrementMaxCount()} maxCount={maxCount} levelOfRecursion={this.props.levelOfRecursion} steps={this.props.steps} />)}
+        {diff > 0 && (<ListMerge values={onebyone} parentCallback = {() => this.reduceLives()} incrementMaxCount={() => this.props.incrementMaxCount()} maxCount={maxCount} levelOfRecursion={this.props.levelOfRecursion} steps={this.props.steps} />)}
       </div>
     );
   }
@@ -86,6 +91,10 @@ class MergeSort extends Component {
     );
   }
 
+  reduceLives() {
+    this.props.parentCallbackFinal(true);
+  }
+  
   nextStep() {
     const { array, left, right, maxCount } = this.props;
     const chunk = array.slice(left, right);
@@ -94,7 +103,7 @@ class MergeSort extends Component {
       return (
         <div className="input">
 
-          {stepCounter < maxCount && (<ListSplit values={chunk} incrementMaxCount={() => this.props.incrementMaxCount()} maxCount={maxCount} levelOfRecursion={this.props.levelOfRecursion} steps={this.props.steps} />)}
+          {stepCounter < maxCount && (<ListSplit values={chunk} parentCallback = {() => this.reduceLives()} incrementMaxCount={() => this.props.incrementMaxCount()} maxCount={maxCount} levelOfRecursion={this.props.levelOfRecursion} steps={this.props.steps} />)}
         </div>
       );
     }
@@ -102,7 +111,7 @@ class MergeSort extends Component {
       return (
         <div className="input">
 
-          {stepCounter < maxCount && (<ListMerge values={chunk} incrementMaxCount={() => this.props.incrementMaxCount()} maxCount={maxCount} levelOfRecursion={this.props.levelOfRecursion - 1} steps={this.props.steps} />)}
+          {stepCounter < maxCount && (<ListMerge values={chunk} parentCallback = {() => this.reduceLives()} incrementMaxCount={() => this.props.incrementMaxCount()} maxCount={maxCount} levelOfRecursion={this.props.levelOfRecursion - 1} steps={this.props.steps} />)}
         </div>
       );
 
@@ -112,7 +121,7 @@ class MergeSort extends Component {
   render() {
 
     return (
-      <div className="merge-sort">
+      <div className="merge-sort123">
         {this.nextStep()}
         {this.recurse()}
       </div>
@@ -133,6 +142,20 @@ class Level2 extends Component {
     };
     this.timerElement = React.createRef();
     this.title = "Game Over";
+    this.numHearts = 3;
+  }
+
+  reduceLives() {
+    this.numHearts--; 
+    if(this.numHearts==0){
+      this.title = "Game Over: No Lives Left";
+      this.setState({ showModalPopup: true });
+    }
+    stepCounter = 0;
+    let newcount = this.state.maxCount;
+    this.setState({
+      maxCount: newcount
+    });
   }
 
   isShowPopup = (status) => {  
@@ -171,6 +194,12 @@ class Level2 extends Component {
     this.title = "Level Completed!"
   };
 
+  // Centering the scrolling position when visit
+  componentDidMount(){
+    let mid = document.body.scrollWidth/2*0.63;
+    document.documentElement.scrollLeft = document.body.scrollLeft = mid;
+  }
+
   render() {
     let array = [...arrayGlobal];
     const arrayc = [...array];
@@ -180,13 +209,16 @@ class Level2 extends Component {
     console.log(steps);
 
 
-
     return (
       <div>
         <IdleTimerContainer></IdleTimerContainer>
         <header>
           <h1 style={{ backgroundColor: "lightblue", padding: "10px" }}>Sortin'</h1>
           <h1>Level 2</h1>
+
+          <HeartDisp
+            numHearts = {this.numHearts}>
+          </HeartDisp>
 
           <br></br>
           <TimerComponent ref={this.timerElement} />
@@ -203,7 +235,7 @@ class Level2 extends Component {
         <section>
 
 
-          <MergeSort array={array} left={0} right={array.length} maxCount={this.state.maxCount} incrementMaxCount={() => this.handleClick()} steps={steps} levelOfRecursion={0} />
+          <MergeSort array={array} left={0} right={array.length} parentCallbackFinal = {() => this.reduceLives()} maxCount={this.state.maxCount} incrementMaxCount={() => this.handleClick()} steps={steps} levelOfRecursion={0} />
         </section>
 
         <ModalPopup  

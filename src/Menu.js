@@ -5,7 +5,10 @@ import reportWebVitals from './reportWebVitals';
 import { Formik, Field, Form } from 'formik';
 
 function Menu() {
+  let mid = document.body.scrollWidth/2*0.63;
+  document.documentElement.scrollLeft = document.body.scrollLeft = mid;
   return (
+    
     <div>
       <h1 h1 style={{ backgroundColor: "lightblue", padding: "10px" }}>Sortin'</h1>
       <button onClick={() => {window.location.assign('/admin')}}>Admin Portal</button>
@@ -17,43 +20,11 @@ function Menu() {
         }}
         onSubmit={async (values) => {
           await new Promise((r) => setTimeout(r, 500));
-          // alert(JSON.stringify(values, null, 2));
-
-          // window.location.href = "http://google.com"
-          // window.location.replace("http://localhost:5500/src/level" + values.level + ".html");
           window.location.href = window.location.protocol + "//"+ window.location.host + "/level" + values.level
-          // return false;
         }}
       >
-        <body>
+        <div>
           <Form>
-            {/* Radio Button Idea */}
-            {/* <div id="my-radio-group">Choose a Level: </div>
-            <div role="group" aria-labelledby="my-radio-group">
-              <label>
-                <Field type="radio" name="level" value="one" checked />
-                One
-              </label>
-              <br />
-              <label>
-                <Field type="radio" name="level" value="two" />
-                Two
-              </label>
-            </div> 
-            
-            <br />
-            <br />
-  
-            <div id="my-radio-group2">Choose a Sorting Algorithm: </div>
-            <div role="group">
-              <label>
-                <Field type="radio" name="algorithm" value="mergeSort" checked />
-                Merge Sort
-              </label>
-            </div>
-  
-            <br />*/}
-
             <div id="levelSelect">Choose a Level: </div>
             <div role="group">
               <label>
@@ -63,7 +34,7 @@ function Menu() {
                 <option value="three">Level 3</option>
                 <option value="four">Level 4</option>
                 <option value="five">Level 5</option>
-                {/* <option value="three">Level 3</option> */}
+                <option value="customparameters">Custom Level</option>
                 </Field>
               </label>
             </div>
@@ -83,10 +54,10 @@ function Menu() {
 
             <button type="submit">Submit</button>
           </Form>
-        </body>
+        </div>
       </Formik>
     </div>
   );
 }
 
-export default Menu
+export default Menu;
