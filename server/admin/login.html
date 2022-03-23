@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sortin' Admin Portal</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <h1 class="page-title">Sortin'</h1>
+    <h2 class="page-heading">Admin Login</h2>
+    <div class="center-contents">
+        <button id="back">Go Back</button>
+    </div>
+    
+
+    <div class="box centered small">
+        <div class="form-container centered">
+            <form action="/login" method="post" name="login">
+                <label for="username" class="form-label">Username</label>
+                <br>
+                <input type="text" name="username" class="form-input" id="username" required>
+                <br>
+
+                <label for="password" class="form-label">Password</label>
+                <br>
+                <input type="password" name="password" class="form-input" id="password" required>
+                <br>
+
+                <input type="submit" class="form-button" value="Log In">
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+        let backButton = document.getElementById('back');
+        backButton.addEventListener('click', () => {window.location.assign('/')});
+    </script>
+</body>
+</html>
