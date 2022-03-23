@@ -56,7 +56,7 @@ server.get('/add-log-entry', (req, res) => {
             let timeSpentSeconds = req.query.timeSpent / 1000;
             let timeSpentHours = Math.floor(timeSpentSeconds / 3600);
             let timeSpentMinutes = Math.floor((timeSpentSeconds % 3600) / 60);
-            let timeSpentString = `${timeSpentHours}:${timeSpentMinutes}:${timeSpentSeconds}`;
+            let timeSpentString = `${timeSpentHours}:${timeSpentMinutes}:${timeSpentSeconds % 60}`;
 
             // Add new entry to DB
             // Connect to DB and send query
@@ -132,6 +132,141 @@ server.get('/get-all-data', (req, res) => {
         return;
     }
 });
+
+// Get stats for a given level
+// General count, count per algorithm, completion rate, count per # mistakes, average mistakes, average/max/min time, 
+server.get('/stats-by-level', (req, res) => {
+    if (useDatabase && req.query.level){
+        let conn = mysql.createConnection(DB_CONFIG);
+        let query = `SELECT * FROM LogEntries WHERE levelNum = ${req.query.level}`;
+        conn.query(query, (err, rows, fields) => {
+            if (err){
+                console.log(err);
+                res.status(500).json({
+                    success: false,
+                    error: 'Database error: ' + err.message
+                });
+                return;
+            }
+            else{
+                res.json({
+                    success: true,
+                    data: {
+                        count: rows.length,
+                        countPerAlgorithm: countByAlgorithm(rows),
+                        completionRate: getCompletionRate(rows),
+                        countByMistakes: countByMistakes(rows),
+                        avgMistakes: getAverageMistakes(rows),
+                        timeStats: getTimeStats(rows)
+                    }
+                });
+                return;
+            }
+        });
+        conn.end();
+    }
+    else if (!useDatabase){
+        res.status(503).json({
+            success: false,
+            error: 'Database functions are disabled on this server'
+        });
+        return;
+    }
+    else{
+        res.status(400).json({
+            success: false,
+            error: 'Request is missing query parameter: level'
+        });
+        return;
+    }
+});
+
+// Get count per algorithm from a data set
+function countByAlgorithm(data){
+    let results = {};
+    for (let entry of data){
+        if (!results[entry.sortAlgorithm]){
+            results[entry.sortAlgorithm] = 0;
+        }
+        results[entry.sortAlgorithm]++;
+    }
+    return results;
+}
+
+// Get count per number of mistakes from a data set
+function countByMistakes(data){
+    let results = [];
+    for (let entry of data){
+        if (!results[entry.mistakesMade])
+        {
+            results[entry.mistakesMade] = 0;
+        }
+        results[entry.mistakesMade]++;      
+    }
+    return results;
+}
+
+// Get completion percentage from a data set
+function getCompletionRate(data){
+    let sum = 0;
+    for (let entry of data){
+        sum += entry.levelCompleted;
+    }
+    return sum / data.length;
+}
+
+// Get average mistakes from a data set
+function getAverageMistakes(data){
+    let sum = 0;
+    for (let entry of data){
+        sum += entry.mistakesMade;
+    }
+    return sum / data.length;
+}
+
+// Get time stats from a data set
+function getTimeStats(data){
+    let times = [];
+    // Parse completion time from each entry and convert to seconds
+    for (let entry of data){
+        let timeSplit = entry.levelTime.split(':');
+        let seconds = (3600 * parseInt(timeSplit[0])) + (60 * parseInt(timeSplit[1])) + parseInt(timeSplit[2]);
+        times.push(seconds);
+    }
+
+    // Calculate min, max, and average
+    let results = {
+        max: 0,
+        min: Infinity,
+        avg: 0
+    };
+    let sum = 0;
+    for (let time of times){
+        if (time > results.max){
+            results.max = time;
+        }
+        if (time < results.min){
+            results.min = time;
+        }
+        sum += time;
+    }
+    results.avg = sum / times.length;
+
+    // Format the min and max times correctly
+    results.max = formatTime(results.max);
+    results.min = formatTime(results.min);
+    results.avg = formatTime(results.avg);
+
+    return results;
+}
+
+function formatTime(secondsTotal){
+    let hours = Math.floor(secondsTotal / 3600);
+    let minutes = Math.floor((secondsTotal % 3600) / 60);
+    let seconds = Math.floor(secondsTotal % 60);
+    return `${hours}:${('0' + minutes).slice(-2)}:${('0' + seconds).slice(-2)}`;
+}
+
 
 
 // ======================================================================== //
