@@ -81,18 +81,6 @@ import './index.scss';
                             
                             
                             <div>
-                            <h3>Submit Score:</h3> 
-                                <form>
-                                    <label>
-                                        Name:&nbsp;
-                                        <input type="text" name="name" />
-                                    </label>
-                                    &nbsp;
-                                    <input type="submit" value="Submit" />
-                                </form>
-                            </div>
-                            <hr/>
-                            <div>
                             <h3>Exit to main menu?</h3> 
                                 <form action="/">
                                     <input type="submit" value="Quit" />
