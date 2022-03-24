@@ -203,8 +203,10 @@ class Level4 extends Component {
 
   // Centering the scrolling position when visit
   componentDidMount(){
-    let mid = document.body.scrollWidth/2*0.64;
-    document.documentElement.scrollLeft = document.body.scrollLeft = mid;
+    var mid = window.innerWidth/2 * 1.6
+    var Scroll = require('react-scroll');
+    var scroll = Scroll.animateScroll;
+    scroll.scrollTo(mid, {horizontal: true});
   }
 
   render() {

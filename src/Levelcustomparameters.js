@@ -7,8 +7,10 @@ import { Formik, Field, Form } from 'formik';
 function LevelCustomParameters() {
     
     //centering the scrolling position when visit
-    let mid = document.body.scrollWidth/2*0.63;
-    document.documentElement.scrollLeft = document.body.scrollLeft = mid;
+    var mid = window.innerWidth/2 * 1.6
+    var Scroll = require('react-scroll');
+    var scroll = Scroll.animateScroll;
+    scroll.scrollTo(mid, {horizontal: true, duration: 2});
 
     return (
         <div>

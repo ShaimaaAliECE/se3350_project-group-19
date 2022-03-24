@@ -9,6 +9,8 @@ import compareTwoNums from "./compareTwoNums";
 import DisplayTwoNums from "./displayTwoNums";
 import IdleTimerContainer from './IdleTimerContainer';
 import ModalPopup from './modal_popup';
+import * as Scroll from 'react-scroll';
+import { Link, Button, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 
 //Global variable to control flow
 var stepCounter = 0;
@@ -169,8 +171,13 @@ class Level1 extends Component {
   };
 
   componentDidMount(){
-    let mid = document.body.scrollWidth/2*0.63;
-    document.documentElement.scrollLeft = document.body.scrollLeft = mid;
+    // let mid = document.body.scrollWidth/2*0.63;
+    var mid = window.innerWidth/2 * 1.6
+    var Scroll = require('react-scroll');
+    var scroll = Scroll.animateScroll;
+    scroll.scrollTo(mid, {horizontal: true});
+    
+//     document.documentElement.scrollLeft = document.body.scrollLeft = mid;
   }
 
   // Centering the scrolling position when visit
