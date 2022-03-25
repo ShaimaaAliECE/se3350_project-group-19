@@ -208,12 +208,11 @@ class Level1 extends Component {
           </form>
 
           <Instructions instruct = {steps[Math.min(steps.length - 1, this.state.maxCount - 2)].instruction}/>
+          <DisplayTwoNums compare = {comp[Math.min(comp.length - 1, this.state.maxCount - 2)].instruction}/>
           <button onClick={() => this.handleClick()}>
             {"next step"}
           </button>
-          <br></br>
-          <br></br>
-          <DisplayTwoNums compare = {comp[Math.min(comp.length - 1, this.state.maxCount - 2)].instruction}/>
+          
           
           
 

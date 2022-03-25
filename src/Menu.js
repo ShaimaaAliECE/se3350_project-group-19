@@ -13,7 +13,11 @@ function Menu() {
     
     <div>
       <h1 h1 style={{ backgroundColor: "lightblue", padding: "10px" }}>Sortin'</h1>
+      
+      <br />
       <button onClick={() => {window.location.assign('/admin')}}>Admin Portal</button>
+      <br />
+      <br />
 
       <Formik
         initialValues={{
