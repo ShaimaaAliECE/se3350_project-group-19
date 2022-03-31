@@ -8,6 +8,8 @@ import TimerComponent from "./TimerComponent";
 import IdleTimerContainer from './IdleTimerContainer';
 import ModalPopup from './modal_popup';
 import HeartDisp from './HeartDisp';
+import compareTwoNums from "./compareTwoNums";
+import DisplayTwoNums from "./displayTwoNums";
 
 
 //Global variable to control flow
@@ -203,7 +205,7 @@ class Level5 extends Component {
 
   // Centering the scrolling position when visit
   componentDidMount(){
-    var mid = window.innerWidth/2 * 2.2
+    var mid = window.innerWidth/2 * 3.2
     var Scroll = require('react-scroll');
     var scroll = Scroll.animateScroll;
     scroll.scrollTo(mid, {horizontal: true});
@@ -215,6 +217,8 @@ class Level5 extends Component {
     let steps = generateMergeSteps(arrayc);
     console.log(steps);
     totalSteps = steps.length;
+    const arraycomp = [...array];
+    let comp = compareTwoNums(arraycomp);
 
     return (
       <div>
@@ -234,6 +238,7 @@ class Level5 extends Component {
           <form action="/">
             <input type="submit" value="Quit" />
           </form>
+          <DisplayTwoNums compare = {comp[Math.min(comp.length - 1, this.state.maxCount - 2)].instruction}/>
           {this.state.complete && <h2>The array is sorted. Level complete!</h2>}
         </header>
 
